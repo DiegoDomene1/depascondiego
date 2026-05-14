@@ -1292,15 +1292,25 @@ em{font-style:italic}
       });
     }
 
+    var payload = JSON.stringify({
+      name: nombre,
+      phone: telefono,
+      lead_name: 'Lead sitio web — ' + objetivo,
+      note: 'Objetivo: ' + objetivo + ' | Presupuesto: ' + budget + ' | Fuente: formulario hero depascondiego.mx'
+    });
+
+    // Kwid → Kommo WebConnect
     fetch('https://data.widgets.wearekwid.com/api/webhook/35470147/ccc1ca8fdeceebd8892d3ad89fb5c194f54c40b3aae3800c88c3e6bdc369d6f5', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        name: nombre,
-        phone: telefono,
-        lead_name: 'Lead sitio web — ' + objetivo,
-        note: 'Objetivo: ' + objetivo + ' | Presupuesto: ' + budget + ' | Fuente: formulario hero depascondiego.mx'
-      })
+      body: payload
+    }).catch(function(){});
+
+    // Make → Sistema de automatización
+    fetch('https://hook.us2.make.com/u0qjdgw9n4261piyjvcqihfumwcpmfyv', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: payload
     }).catch(function(){});
 
     this.innerHTML='<p style="color:var(--oro);font-family:var(--ff-d);font-size:18px;font-weight:300;text-align:center;padding:20px 0">Listo. Te escribo en menos de 24 horas.</p>';
