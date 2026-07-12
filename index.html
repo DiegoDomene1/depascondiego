@@ -32,10 +32,11 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'TU_PIXEL_ID_AQUI');
+fbq('init', '1423786182893334');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1423786182893334&ev=PageView&noscript=1"/></noscript>
+<script>var KOMMO_ENDPOINT='https://data.widgets.wearekwid.com/api/webhook/35470147/ccc1ca8fdeceebd8892d3ad89fb5c194f54c40b3aae3800c88c3e6bdc369d6f5';</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Diego Domene","jobTitle":"Asesor de Preventa Inmobiliaria","worksFor":{"@type":"Organization","name":"Nest"},"url":"https://depascondiego.mx","description":"Asesor de preventa residencial en Monterrey. RISE, ANIDA, WEST 2 y WEST 3.","address":{"@type":"PostalAddress","addressLocality":"Monterrey","addressRegion":"Nuevo León","addressCountry":"MX"},"sameAs":["https://instagram.com/depascondiego"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"RealEstateAgent","@id":"https://depascondiego.mx/#agente","name":"Depas con Diego","url":"https://depascondiego.mx","telephone":"+528132407191","priceRange":"$7,400,000 - $25,800,000 MXN","address":{"@type":"PostalAddress","addressLocality":"Monterrey","addressRegion":"Nuevo León","addressCountry":"MX"},"geo":{"@type":"GeoCoordinates","latitude":25.6715685,"longitude":-100.3475935},"areaServed":[{"@type":"City","name":"Monterrey"},{"@type":"City","name":"San Pedro Garza García"},{"@type":"City","name":"Santa Catarina"},{"@type":"Country","name":"México"}],"knowsAbout":["preventa inmobiliaria","departamentos en Monterrey","inversión inmobiliaria","plusvalía","crédito hipotecario"],"sameAs":["https://instagram.com/depascondiego"],"description":"Asesoría gratuita de departamentos en preventa en Monterrey: RISE (Obispado), ANIDA (Santa María), WEST 2 y WEST 3 (Valle Poniente), proyectos de Nest. Atención presencial y remota a toda la república.","dateModified":"2026-07-12"}</script>
@@ -80,6 +81,16 @@ em{font-style:italic}
 .nav-cta{font-family:var(--ff-m);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--bone);background:var(--verde);padding:9px 18px;border-radius:2px;transition:background 0.2s}
 .nav-cta:hover{background:var(--barro)}
 .nav-mob{display:none;cursor:pointer;font-size:20px;color:var(--gris);border:none;background:none}
+.nav-tools{position:relative;display:flex;align-items:center}
+.nav-tools-btn{display:flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:0}
+.nav-tools-menu{display:none;position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);background:rgba(242,238,230,0.98);backdrop-filter:blur(10px);border:0.5px solid rgba(20,20,20,0.12);border-radius:2px;padding:16px 18px;flex-direction:column;gap:14px;min-width:230px;z-index:101;box-shadow:0 8px 24px rgba(20,20,20,0.06)}
+.nav-tools.open .nav-tools-menu{display:flex}
+.nav-tools.open .nav-tools-btn{color:var(--tinta)}
+.nav-tools-menu .nav-link{padding:2px 0}
+@media(max-width:960px){
+  .nav-tools{flex-direction:column;align-items:flex-start}
+  .nav-tools-menu{position:static;transform:none;box-shadow:none;border:none;background:transparent;padding:12px 0 0 14px;min-width:0}
+}
 
 /* HERO */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:60px}
@@ -250,6 +261,10 @@ em{font-style:italic}
 .calc-pill.match{border-color:var(--verde);color:#fff;background:rgba(47,74,54,0.5);font-weight:500}
 .calc-cta{width:100%;padding:12px;background:var(--verde);border:none;border-radius:2px;font-family:var(--ff-m);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--bone);cursor:pointer;transition:background 0.2s}
 .calc-cta:hover{background:var(--barro)}
+
+/* GATE CAPTURA */
+.gate-wrap.locked{filter:blur(7px);pointer-events:none;user-select:none}
+.gate-form{margin-top:16px;border-top:0.5px solid rgba(242,238,230,0.1);padding-top:16px}
 
 /* PROCESO */
 .process{padding:120px 0;background:var(--bone);border-top:0.5px solid rgba(20,20,20,0.08)}
@@ -467,7 +482,13 @@ em{font-style:italic}
     </a>
     <div class="nav-links">
       <a href="#proyectos" class="nav-link">Proyectos</a>
-      <a href="#calculadora" class="nav-link">Calculadora</a>
+      <div class="nav-tools" id="nav-tools">
+        <button class="nav-link nav-tools-btn" aria-expanded="false" aria-haspopup="true" onclick="toggleTools(event)">Herramientas <span aria-hidden="true" style="font-size:8px">&#9662;</span></button>
+        <div class="nav-tools-menu" role="menu" aria-label="Herramientas">
+          <a href="#calculadora" class="nav-link" role="menuitem">Presupuesto &middot; cu&aacute;nto invertir</a>
+          <a href="#retorno" class="nav-link" role="menuitem">Retorno &middot; plusval&iacute;a estimada</a>
+        </div>
+      </div>
       <a href="#proceso" class="nav-link">Método</a>
       <a href="#sobre-diego" class="nav-link">Sobre Diego</a>
       <a href="#faq" class="nav-link">FAQ</a>
@@ -810,6 +831,7 @@ em{font-style:italic}
         <div class="calc-result">
           <div class="calc-result-range" id="result-range">— — —</div>
           <div class="calc-result-label">Presupuesto estimado total (±10%)</div>
+          <div class="gate-wrap locked" data-gate-content>
           <div class="calc-bkd">
             <div class="cb"><div class="cb-n" id="bd-e">—</div><div class="cb-l">Enganche</div></div>
             <div class="cb"><div class="cb-n" id="bd-m">—</div><div class="cb-l">Mensualidades</div></div>
@@ -822,6 +844,86 @@ em{font-style:italic}
             <span class="calc-pill" id="cp-rise">RISE</span>
           </div>
           <button class="calc-cta" onclick="calcContacto()">Quiero asesoría con este presupuesto →</button>
+          </div>
+        <div class="gate-form" id="gate-form-p">
+          <p class="calc-slabel" style="color:rgba(242,238,230,0.62)">Desbloquea tu an&aacute;lisis completo</p>
+          <p style="font-size:12px;color:rgba(242,238,230,0.55);margin-bottom:12px;line-height:1.5">Deja tus datos y desbloqueo tu desglose completo. Sin spam &mdash; soy yo, no un robot.</p>
+          <div class="field"><label for="gate-n-p">Nombre</label><input type="text" id="gate-n-p" placeholder="Tu nombre" autocomplete="name"></div>
+          <div class="field"><label for="gate-w-p">WhatsApp</label><input type="tel" id="gate-w-p" placeholder="10 d&iacute;gitos" autocomplete="tel" inputmode="numeric"></div>
+          <div class="field"><label for="gate-e-p">Correo (opcional)</label><input type="email" id="gate-e-p" placeholder="tucorreo@ejemplo.com" autocomplete="email"></div>
+          <input type="text" id="gate-hp-p" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:1px;width:1px;opacity:0">
+          <label style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:rgba(242,238,230,0.55);line-height:1.5;margin:4px 0 10px;cursor:pointer"><input type="checkbox" id="gate-c-p" style="margin-top:2px;accent-color:var(--verde)"><span>Acepto el <a href="/aviso-de-privacidad.html" target="_blank" rel="noopener" style="color:var(--oro);text-decoration:underline">aviso de privacidad</a></span></label>
+          <p id="gate-err-p" style="display:none;font-family:var(--ff-m);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#E08A6D;margin-bottom:8px" role="alert"></p>
+          <button class="calc-cta" onclick="gateSubmit('p')">Ver mi an&aacute;lisis completo &rarr;</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RETORNO -->
+<section class="calc-section" id="retorno" style="background:var(--bone)">
+  <div class="container">
+    <div class="calc-grid">
+      <div class="reveal-left">
+        <p class="mono">Herramientas &middot; Calculadora de retorno</p>
+        <h2 class="calc-h2">Tu retorno,<br>antes de<br><em>firmar<span style="color:var(--barro)">.</span></em></h2>
+        <p class="calc-body">Estima la plusval&iacute;a de tu depa entre hoy y la entrega, y el retorno sobre tu enganche. N&uacute;meros referenciales &mdash; los datos hist&oacute;ricos reales por proyecto te los comparto en la asesor&iacute;a.</p>
+        <div class="calc-feats">
+          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Plusval&iacute;a de preventa a entrega seg&uacute;n el plazo del proyecto</div></div>
+          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Retorno calculado sobre tu enganche, no solo sobre el precio</div></div>
+          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Ajusta la plusval&iacute;a anual seg&uacute;n la zona que te interesa</div></div>
+          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Sin compromiso, sin datos personales</div></div>
+        </div>
+      </div>
+      <div class="calc-widget reveal-right">
+        <p class="calc-slabel">1 &middot; Tu depa</p>
+        <div class="calc-field">
+          <label>Precio de lista hoy <span id="ret-precio-v">$9,000,000</span></label>
+          <input type="range" id="ret-precio" min="7400000" max="26000000" step="100000" value="9000000" oninput="retUpdate()" aria-label="Precio de lista">
+        </div>
+        <p class="calc-slabel" style="margin-top:18px">2 &middot; Tu aportaci&oacute;n</p>
+        <div class="calc-field">
+          <label>Enganche <span id="ret-eng-v">20% &middot; $1,800,000</span></label>
+          <input type="range" id="ret-eng" min="5" max="50" step="1" value="20" oninput="retUpdate()" aria-label="Porcentaje de enganche">
+        </div>
+        <p class="calc-slabel" style="margin-top:18px">3 &middot; Horizonte</p>
+        <div class="calc-field">
+          <label style="margin-bottom:10px">Tiempo a la entrega</label>
+          <div class="calc-tabs">
+            <button class="calc-tab" data-y="1" onclick="setRetPlazo(this)">1 a&ntilde;o</button>
+            <button class="calc-tab active" data-y="2" onclick="setRetPlazo(this)">2 a&ntilde;os</button>
+            <button class="calc-tab" data-y="3" onclick="setRetPlazo(this)">3 a&ntilde;os</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Plusval&iacute;a anual estimada <span id="ret-plus-v">10% anual</span></label>
+          <input type="range" id="ret-plus" min="4" max="20" step="1" value="10" oninput="retUpdate()" aria-label="Plusval&iacute;a anual estimada">
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-range" id="ret-ganancia">&mdash; &mdash; &mdash;</div>
+          <div class="calc-result-label">Ganancia estimada a la entrega (plusval&iacute;a)</div>
+          <div class="gate-wrap locked" data-gate-content>
+          <div class="calc-bkd">
+            <div class="cb"><div class="cb-n" id="ret-valor">&mdash;</div><div class="cb-l">Valor a entrega</div></div>
+            <div class="cb"><div class="cb-n" id="ret-aport">&mdash;</div><div class="cb-l">Tu enganche</div></div>
+            <div class="cb"><div class="cb-n" id="ret-roe">&mdash;</div><div class="cb-l">Retorno s/ enganche</div></div>
+          </div>
+          <p style="font-family:var(--ff-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(242,238,230,0.5);margin-bottom:14px;line-height:1.6">Estimaci&oacute;n referencial. La plusval&iacute;a hist&oacute;rica no garantiza resultados futuros.</p>
+          <button class="calc-cta" onclick="retContacto()">Quiero este an&aacute;lisis con datos reales &rarr;</button>
+          </div>
+        <div class="gate-form" id="gate-form-r">
+          <p class="calc-slabel" style="color:rgba(242,238,230,0.62)">Desbloquea tu an&aacute;lisis de retorno</p>
+          <p style="font-size:12px;color:rgba(242,238,230,0.55);margin-bottom:12px;line-height:1.5">Deja tus datos y desbloqueo tu desglose completo. Sin spam &mdash; soy yo, no un robot.</p>
+          <div class="field"><label for="gate-n-r">Nombre</label><input type="text" id="gate-n-r" placeholder="Tu nombre" autocomplete="name"></div>
+          <div class="field"><label for="gate-w-r">WhatsApp</label><input type="tel" id="gate-w-r" placeholder="10 d&iacute;gitos" autocomplete="tel" inputmode="numeric"></div>
+          <div class="field"><label for="gate-e-r">Correo (opcional)</label><input type="email" id="gate-e-r" placeholder="tucorreo@ejemplo.com" autocomplete="email"></div>
+          <input type="text" id="gate-hp-r" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:1px;width:1px;opacity:0">
+          <label style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:rgba(242,238,230,0.55);line-height:1.5;margin:4px 0 10px;cursor:pointer"><input type="checkbox" id="gate-c-r" style="margin-top:2px;accent-color:var(--verde)"><span>Acepto el <a href="/aviso-de-privacidad.html" target="_blank" rel="noopener" style="color:var(--oro);text-decoration:underline">aviso de privacidad</a></span></label>
+          <p id="gate-err-r" style="display:none;font-family:var(--ff-m);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#E08A6D;margin-bottom:8px" role="alert"></p>
+          <button class="calc-cta" onclick="gateSubmit('r')">Ver mi an&aacute;lisis completo &rarr;</button>
+        </div>
         </div>
       </div>
     </div>
@@ -932,6 +1034,7 @@ em{font-style:italic}
         <a href="#sobre-diego" class="footer-link">Sobre Diego</a>
         <a href="#faq" class="footer-link">FAQ</a>
         <a href="#contacto" class="footer-link">Contacto</a>
+        <a href="/aviso-de-privacidad.html" class="footer-link">Aviso de privacidad</a>
       </nav>
       <div class="footer-legal">Asesor en Nest · Monterrey NL<br>© 2026 depas con diego.</div>
     </div>
@@ -969,6 +1072,9 @@ em{font-style:italic}
   });
   document.querySelectorAll('.nav-link').forEach(function(link) {
     link.addEventListener('click', function() {
+      if (this.classList.contains('nav-tools-btn')) return;
+      if (typeof closeTools === 'function') closeTools();
+      if (!navOpen) return;
       navOpen = false;
       document.querySelector('.nav-links').style.cssText = 'display:none';
       document.querySelector('.nav-mob').innerHTML = '&#9776;';
@@ -1230,7 +1336,7 @@ em{font-style:italic}
 
     // Meta Pixel
     if (typeof fbq !== 'undefined') {
-      fbq('track', 'Lead', {
+      fbq('track', 'Contact', {
         content_name: 'calculadora',
         content_category: matches.join(','),
         value: Math.round((low + high) / 2),
@@ -1239,7 +1345,7 @@ em{font-style:italic}
     }
 
     // Kommo WebConnect
-    fetch('https://data.widgets.wearekwid.com/api/webhook/35470147/ccc1ca8fdeceebd8892d3ad89fb5c194f54c40b3aae3800c88c3e6bdc369d6f5', {
+    fetch(KOMMO_ENDPOINT, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -1263,7 +1369,7 @@ em{font-style:italic}
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Contact', { content_name: 'nav_cta', content_category: 'WhatsApp' });
     }
-    fetch('https://data.widgets.wearekwid.com/api/webhook/35470147/ccc1ca8fdeceebd8892d3ad89fb5c194f54c40b3aae3800c88c3e6bdc369d6f5', {
+    fetch(KOMMO_ENDPOINT, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -1285,7 +1391,7 @@ em{font-style:italic}
     if (typeof gtag !== 'undefined') {
       gtag('event', 'project_click', { project: projectName });
     }
-    fetch('https://data.widgets.wearekwid.com/api/webhook/35470147/ccc1ca8fdeceebd8892d3ad89fb5c194f54c40b3aae3800c88c3e6bdc369d6f5', {
+    fetch(KOMMO_ENDPOINT, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -1310,7 +1416,7 @@ em{font-style:italic}
       });
     }
 
-    fetch('https://data.widgets.wearekwid.com/api/webhook/35470147/ccc1ca8fdeceebd8892d3ad89fb5c194f54c40b3aae3800c88c3e6bdc369d6f5', {
+    fetch(KOMMO_ENDPOINT, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -1323,6 +1429,148 @@ em{font-style:italic}
 
     this.innerHTML='<p style="color:var(--oro);font-family:var(--ff-d);font-size:18px;font-weight:300;text-align:center;padding:20px 0">Listo. Te escribo en menos de 24 horas.</p>';
   });
+</script>
+
+<script>
+/* DROPDOWN HERRAMIENTAS */
+function toggleTools(ev){
+  ev.stopPropagation();
+  var t = document.getElementById('nav-tools');
+  var open = t.classList.toggle('open');
+  t.querySelector('.nav-tools-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeTools(){
+  var t = document.getElementById('nav-tools');
+  if (t){ t.classList.remove('open'); t.querySelector('.nav-tools-btn').setAttribute('aria-expanded','false'); }
+}
+document.addEventListener('click', function(ev){
+  var t = document.getElementById('nav-tools');
+  if (t && !t.contains(ev.target)) closeTools();
+});
+
+/* CALCULADORA RETORNO */
+var retYears = 2;
+function setRetPlazo(btn){
+  document.querySelectorAll('#retorno .calc-tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  retYears = parseInt(btn.getAttribute('data-y'), 10);
+  retUpdate();
+}
+function retFmt(n){ return '$' + Math.round(n).toLocaleString('es-MX'); }
+function retVals(){
+  var p = parseInt(document.getElementById('ret-precio').value, 10);
+  var e = parseInt(document.getElementById('ret-eng').value, 10);
+  var g = parseInt(document.getElementById('ret-plus').value, 10);
+  var valor = p * Math.pow(1 + g/100, retYears);
+  var ganancia = valor - p;
+  var eng = p * e / 100;
+  var roe = eng > 0 ? Math.round(ganancia / eng * 100) : 0;
+  return { p:p, e:e, g:g, valor:valor, ganancia:ganancia, eng:eng, roe:roe };
+}
+function retUpdate(){
+  var v = retVals();
+  document.getElementById('ret-precio-v').textContent = retFmt(v.p);
+  document.getElementById('ret-eng-v').textContent = v.e + '% \u00b7 ' + retFmt(v.eng);
+  document.getElementById('ret-plus-v').textContent = v.g + '% anual';
+  document.getElementById('ret-ganancia').textContent = '+' + retFmt(Math.round(v.ganancia/10000)*10000);
+  document.getElementById('ret-valor').textContent = retFmt(Math.round(v.valor/10000)*10000);
+  document.getElementById('ret-aport').textContent = retFmt(v.eng);
+  document.getElementById('ret-roe').textContent = v.roe + '%';
+}
+function retContacto(){
+  var v = retVals();
+  var plazoTxt = retYears === 1 ? '1 a\u00f1o' : retYears + ' a\u00f1os';
+  var msg = 'Hola Diego, us\u00e9 tu calculadora de retorno y quiero el an\u00e1lisis con datos reales.%0A%0A' +
+    '*Precio:* ' + retFmt(v.p) + '%0A' +
+    '*Enganche:* ' + v.e + '%25 (' + retFmt(v.eng) + ')%0A' +
+    '*Plazo:* ' + plazoTxt + '%0A' +
+    '*Plusval\u00eda estimada:* ' + v.g + '%25 anual%0A' +
+    '*Ganancia estimada:* ' + retFmt(v.ganancia) + '%0A' +
+    '*Retorno sobre enganche:* ' + v.roe + '%25';
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Contact', {
+      content_name: 'calculadora_retorno',
+      value: Math.round(v.ganancia),
+      currency: 'MXN'
+    });
+  }
+  fetch(KOMMO_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      lead_name: 'Lead calculadora retorno',
+      note: 'CALC RETORNO depascondiego.mx\n' +
+            'Precio: ' + retFmt(v.p) + '\n' +
+            'Enganche: ' + v.e + '% (' + retFmt(v.eng) + ')\n' +
+            'Plazo: ' + plazoTxt + '\n' +
+            'Plusvalia est.: ' + v.g + '% anual\n' +
+            'Ganancia est.: ' + retFmt(v.ganancia) + '\n' +
+            'Retorno s/enganche: ' + v.roe + '%'
+    })
+  }).catch(function(){});
+  window.open('https://wa.me/528132407191?text=' + msg, '_blank');
+}
+retUpdate();
+</script>
+
+<script>
+/* GATE DE CAPTURA */
+function gateUnlockAll(){
+  document.querySelectorAll('[data-gate-content]').forEach(function(w){ w.classList.remove('locked'); });
+  document.querySelectorAll('.gate-form').forEach(function(f){ f.style.display = 'none'; });
+}
+function gateErr(s, m){
+  var e = document.getElementById('gate-err-' + s);
+  e.textContent = m; e.style.display = 'block';
+}
+function gateSubmit(s){
+  var n  = document.getElementById('gate-n-' + s).value.trim();
+  var w  = document.getElementById('gate-w-' + s).value.replace(/\D/g, '');
+  var em = document.getElementById('gate-e-' + s).value.trim();
+  var c  = document.getElementById('gate-c-' + s).checked;
+  var hp = document.getElementById('gate-hp-' + s).value;
+  if (hp) { gateUnlockAll(); return; }
+  if (w.length === 12 && w.indexOf('52') === 0) w = w.slice(2);
+  if (w.length === 13 && w.indexOf('521') === 0) w = w.slice(3);
+  if (!n) return gateErr(s, 'Falta tu nombre');
+  if (w.length !== 10) return gateErr(s, 'WhatsApp: deben ser 10 d\u00edgitos');
+  if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return gateErr(s, 'Revisa el correo');
+  if (!c) return gateErr(s, 'Acepta el aviso de privacidad');
+  document.getElementById('gate-err-' + s).style.display = 'none';
+  var tool = s === 'p' ? 'Presupuesto' : 'Retorno';
+  var detalle = '';
+  try {
+    if (s === 'p') {
+      var e2 = exactVals.eng !== null ? exactVals.eng : engVal();
+      var m2 = exactVals.men !== null ? exactVals.men : menVal();
+      var l2 = exactVals.liq !== null ? exactVals.liq : liqVal();
+      var h2 = exactVals.hipo !== null ? exactVals.hipo : hipoVal();
+      detalle = 'Enganche: $' + e2.toLocaleString('es-MX') + ' | Mensualidad: $' + m2.toLocaleString('es-MX') + '/mes | Liquidacion: $' + l2.toLocaleString('es-MX') + ' | Hipoteca: $' + h2.toLocaleString('es-MX');
+    } else {
+      var v = retVals();
+      detalle = 'Precio: ' + retFmt(v.p) + ' | Enganche: ' + v.e + '% | ' + retYears + ' anos | Plusvalia: ' + v.g + '%/ano | Ganancia est.: ' + retFmt(v.ganancia) + ' | Retorno s/enganche: ' + v.roe + '%';
+    }
+  } catch (err) {}
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', { content_name: 'gate_' + tool.toLowerCase(), content_category: 'herramientas' });
+  }
+  fetch(KOMMO_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      lead_name: 'Lead ' + tool + ' \u2014 ' + n,
+      note: 'GATE ' + tool.toUpperCase() + ' depascondiego.mx\n' +
+            'Nombre: ' + n + '\n' +
+            'WhatsApp: ' + w + '\n' +
+            'Correo: ' + (em || 'no proporcionado') + '\n' +
+            detalle + '\n' +
+            'Consentimiento aviso de privacidad: SI (' + new Date().toISOString() + ')'
+    })
+  }).catch(function(){});
+  try { localStorage.setItem('dcd_gate', JSON.stringify({ n: n, w: w, ts: Date.now() })); } catch (err) {}
+  gateUnlockAll();
+}
+try { if (localStorage.getItem('dcd_gate')) gateUnlockAll(); } catch (err) {}
 </script>
 </body>
 </html>
