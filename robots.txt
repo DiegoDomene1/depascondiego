@@ -1,0 +1,19 @@
+# depascondiego.mx — permitir buscadores y bots de búsqueda de IA (citas)
+User-agent: *
+Allow: /
+
+# Bots de BÚSQUEDA de IA — queremos ser citados
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://depascondiego.mx/sitemap.xml
