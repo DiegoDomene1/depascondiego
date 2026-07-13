@@ -28,7 +28,7 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1423786182893334&ev=PageView&noscript=1"/></noscript>
   <style>
-    :root{--bone:#F2EEE6;--paper:#EAE4D6;--tinta:#141414;--verde:#2F4A36;--barro:#B8593E;--oro:#C9A86B;--gris:#63615A;--ff-d:'Fraunces',serif;--ff-b:'Inter Tight',sans-serif;--ff-m:'JetBrains Mono',monospace}
+    :root{--bone:#F2EEE6;--paper:#EAE4D6;--tinta:#141414;--verde:#2F4A36;--barro:#B8593E;--oro:#C9A86B;--gris:#63615A;--ff-d:'Fraunces',serif;--ff-b:'Inter Tight',sans-serif;--ff-m:'JetBrains Mono',monospace;--ease:cubic-bezier(0.16,1,0.3,1)}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:var(--ff-b);background:var(--bone);color:var(--tinta);-webkit-font-smoothing:antialiased;min-height:100vh}
@@ -37,7 +37,7 @@ fbq('track', 'PageView');
     .mono{font-family:var(--ff-m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
     .topbar{height:60px;display:flex;align-items:center;border-bottom:.5px solid rgba(20,20,20,.08)}
     .back-link{transition:color .2s;font-size:10px}.back-link:hover{color:var(--tinta)}
-    .back-link:focus-visible,.btn-p:focus-visible,.form-btn:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+    .back-link:focus-visible,.btn-p:focus-visible,.form-btn:focus-visible,.results-wa:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
     .intro{padding:70px 0 44px;display:grid;grid-template-columns:minmax(0,720px) 1fr;gap:40px;align-items:end}
     .eyebrow{margin-bottom:22px}
     .hero-h1{font-family:var(--ff-d);font-size:clamp(38px,5vw,64px);font-weight:300;line-height:1.04;letter-spacing:-.02em;margin-bottom:22px}
@@ -47,16 +47,21 @@ fbq('track', 'PageView');
     .calculator{display:grid;grid-template-columns:minmax(340px,.88fr) minmax(420px,1.12fr);min-height:720px;border:.5px solid rgba(20,20,20,.1);border-radius:2px;overflow:hidden}
     .form-panel{background:var(--tinta);padding:44px;display:flex;flex-direction:column;justify-content:center}
     .panel-eyebrow{color:rgba(242,238,230,.5);margin-bottom:14px}
-    .form-title{font-family:var(--ff-d);font-size:30px;font-weight:300;color:var(--bone);line-height:1.15;margin-bottom:24px}
+    .form-title{font-family:var(--ff-d);font-size:30px;font-weight:300;color:var(--bone);line-height:1.15;margin-bottom:20px}
     .form-title em{color:var(--oro)}
-    .field{margin-bottom:9px}
-    .field label{display:block;font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,238,230,.55);margin-bottom:5px}
-    .field input{width:100%;background:rgba(242,238,230,.05);border:.5px solid rgba(242,238,230,.1);border-radius:2px;padding:10px 14px;font-size:14px;color:var(--bone);outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;color-scheme:dark}
-    .field input::placeholder{color:rgba(242,238,230,.4)}.field input:focus{border-color:rgba(201,168,107,.5)}
-    .field-error{display:block;min-height:14px;margin-top:3px;font-size:11px;line-height:1.2;color:var(--barro)}
+    .rf-hint{font-family:var(--ff-m);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,238,230,.5);margin-bottom:18px;display:flex;align-items:center;gap:6px}
+    .rfield{margin-bottom:15px}
+    .rfield label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--ff-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,238,230,.55);margin-bottom:7px}
+    .rfield input[type=range]{width:100%;accent-color:var(--oro);cursor:pointer}
+    .rf-val{cursor:text;border-bottom:1px dashed rgba(242,238,230,.3);padding-bottom:1px;font-family:var(--ff-d);font-size:16px;font-weight:300;color:var(--bone);letter-spacing:0;text-transform:none;transition:border-color .2s;white-space:nowrap;text-align:right}
+    .rf-val:hover{border-color:var(--oro)}
+    .rf-val:focus{outline:none;border-bottom:1.5px solid var(--oro)}
+    .plan-err{display:none;font-size:12px;color:#E08A6D;line-height:1.5;margin:2px 0 10px}
     .form-btn{width:100%;padding:13px;background:var(--verde);border:0;border-radius:2px;font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);cursor:pointer;margin-top:7px;transition:background .2s}.form-btn:hover{background:var(--barro)}
     .results-panel{background:var(--paper);padding:44px 48px;display:flex;flex-direction:column;justify-content:center}
-    .results-title{font-family:var(--ff-d);font-size:30px;font-weight:300;line-height:1.15;margin:12px 0 28px}
+    .results-title{font-family:var(--ff-d);font-size:30px;font-weight:300;line-height:1.15;margin:12px 0 18px}
+    .results-wa{display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);background:var(--verde);padding:12px 20px;border-radius:2px;margin-bottom:18px;transition:background .2s;cursor:pointer}
+    .results-wa:hover{background:var(--barro)}
     .empty-state{max-width:360px}.empty-state p:last-child{font-family:var(--ff-d);font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.15;margin-top:18px;color:var(--verde)}
     .result-section{padding:22px 0;border-top:.5px solid rgba(20,20,20,.12)}
     .result-section:first-of-type{padding-top:0;border-top:0}
@@ -77,6 +82,7 @@ fbq('track', 'PageView');
     .btn-p{font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);background:var(--verde);padding:14px 32px;border-radius:2px;transition:background .2s}.btn-p:hover{background:var(--barro)}
     @media(max-width:900px){.intro{grid-template-columns:1fr;padding-top:52px}.intro-note{display:none}.calculator{grid-template-columns:1fr}.form-panel,.results-panel{padding:42px 36px}.results-panel{min-height:540px}}
     @media(max-width:600px){.container{width:min(100% - 32px,1160px)}.intro{padding:42px 0 34px}.hero-h1{font-size:clamp(36px,12vw,48px)}.form-panel,.results-panel{padding:36px 24px}.calculator{border-left:0;border-right:0}.plan-grid,.phase-grid{grid-template-columns:1fr}.star{grid-column:auto}.results-panel{min-height:620px}}
+    @media(hover:none) and (pointer:coarse){.rfield input[type=range]{height:32px}}
     a,button,input,select,textarea,label,summary{touch-action:manipulation}
     .gate-roi{max-width:420px}
     .gate-roi .gr-field{margin-bottom:10px}
@@ -101,13 +107,33 @@ fbq('track', 'PageView');
     <section class="calculator container" aria-label="Calculadora de retorno de inversión">
       <div class="form-panel">
         <p class="mono panel-eyebrow">Tu escenario</p><h2 class="form-title">Proyecta tu <em>inversión</em>.</h2>
+        <p class="rf-hint"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>Toca una cifra subrayada para escribir tu monto exacto</p>
         <form id="roi-form" novalidate>
-          <div class="field"><label for="precio">Precio de lista</label><input id="precio" name="precio" type="text" inputmode="numeric" placeholder="$1,000,000" aria-describedby="error-precio"><span class="field-error" id="error-precio" aria-live="polite"></span></div>
-          <div class="field"><label for="enganche">Enganche (pago inicial)</label><input id="enganche" name="enganche" type="text" inputmode="numeric" placeholder="$200,000" aria-describedby="error-enganche"><span class="field-error" id="error-enganche" aria-live="polite"></span></div>
-          <div class="field"><label for="numMensualidades">Mensualidades en obra (cuántas)</label><input id="numMensualidades" name="numMensualidades" type="text" inputmode="numeric" placeholder="12" aria-describedby="error-numMensualidades"><span class="field-error" id="error-numMensualidades" aria-live="polite"></span></div>
-          <div class="field"><label for="montoMensual">Monto por mensualidad</label><input id="montoMensual" name="montoMensual" type="text" inputmode="numeric" placeholder="$25,000" aria-describedby="error-montoMensual error-plan"><span class="field-error" id="error-montoMensual" aria-live="polite"></span><span class="field-error" id="error-plan" aria-live="polite"></span></div>
-          <div class="field"><label for="fechaEntrega">Fecha de entrega</label><input id="fechaEntrega" name="fechaEntrega" type="month" placeholder="2027-07" aria-describedby="error-fechaEntrega"><span class="field-error" id="error-fechaEntrega" aria-live="polite"></span></div>
-          <div class="field"><label for="plusvaliaPct">Plusvalía anual (%)</label><input id="plusvaliaPct" name="plusvaliaPct" type="text" inputmode="decimal" placeholder="10%" aria-describedby="error-plusvaliaPct"><span class="field-error" id="error-plusvaliaPct" aria-live="polite"></span></div>
+          <div class="rfield">
+            <label for="s-precio">Precio de lista <span class="rf-val" id="v-precio" data-k="precio" data-min="500000" data-max="60000000" tabindex="0">$9,000,000</span></label>
+            <input type="range" id="s-precio" min="1000000" max="30000000" step="50000" value="9000000" aria-label="Precio de lista">
+          </div>
+          <div class="rfield">
+            <label for="s-eng">Enganche (pago inicial) <span class="rf-val" id="v-eng" data-k="eng" data-min="50000" data-max="60000000" tabindex="0">$1,800,000</span></label>
+            <input type="range" id="s-eng" min="100000" max="15000000" step="50000" value="1800000" aria-label="Enganche">
+          </div>
+          <div class="rfield">
+            <label for="s-nmen">Mensualidades en obra (cuántas) <span class="rf-val" id="v-nmen" data-k="nmen" data-min="0" data-max="120" tabindex="0">24</span></label>
+            <input type="range" id="s-nmen" min="0" max="60" step="1" value="24" aria-label="Número de mensualidades en obra">
+          </div>
+          <div class="rfield">
+            <label for="s-men">Monto por mensualidad <span class="rf-val" id="v-men" data-k="men" data-min="0" data-max="10000000" tabindex="0">$25,000</span></label>
+            <input type="range" id="s-men" min="0" max="300000" step="5000" value="25000" aria-label="Monto por mensualidad">
+          </div>
+          <div class="rfield">
+            <label for="s-plazo">Plazo a la entrega <span class="rf-val" id="v-plazo" data-k="plazo" data-min="1" data-max="120" tabindex="0">24 meses</span></label>
+            <input type="range" id="s-plazo" min="1" max="60" step="1" value="24" aria-label="Meses a la entrega">
+          </div>
+          <div class="rfield">
+            <label for="s-plus">Plusvalía anual estimada <span class="rf-val" id="v-plus" data-k="plus" data-min="0" data-max="50" tabindex="0">7% anual</span></label>
+            <input type="range" id="s-plus" min="0" max="20" step="1" value="7" aria-label="Plusvalía anual estimada">
+          </div>
+          <p class="plan-err" id="plan-err" role="alert"></p>
           <button class="form-btn" type="submit">Calcular retorno</button>
         </form>
       </div>
@@ -117,7 +143,7 @@ fbq('track', 'PageView');
           <p class="mono">Proyección preliminar</p>
           <h2 class="results-title">Lo que dicen tus <em>números</em>.</h2>
           <div class="result-section" style="border-top:0;padding-top:0"><div class="phase-grid">
-            <p class="result-item star" style="padding-top:0"><span class="result-value" id="teaser-rendimiento"></span><span class="result-label">Rendimiento total anual estimado</span><span class="result-note">A partir de la entrega, si conservas y rentas el depa (renta ref. 4.5&ndash;6% del valor).</span></p>
+            <p class="result-item star" style="padding-top:0"><span class="result-value" id="teaser-rendimiento"></span><span class="result-label">Rendimiento total anual estimado &middot; bruto, antes de gastos, sobre tu inversi&oacute;n total</span><span class="result-note">A partir de la entrega, si conservas y rentas el depa (renta ref. 4.5&ndash;6% del valor).</span></p>
           </div></div>
         </div>
         <div id="gate-roi" class="gate-roi" hidden>
@@ -133,6 +159,7 @@ fbq('track', 'PageView');
         </div>
         <div id="results" hidden>
           <p class="mono">Proyección a la entrega</p><h2 class="results-title">Lo que dicen tus números.</h2>
+          <a class="results-wa" id="results-wa" href="https://wa.me/528132407191" target="_blank" rel="noopener">Platicar estos números por WhatsApp →</a>
           <section class="result-section"><h3 class="section-heading">Tu plan de pagos</h3><div class="plan-grid">
             <p class="result-item"><span class="result-label">Enganche</span><span class="result-value" id="result-enganche"></span></p>
             <p class="result-item"><span class="result-label" id="result-mensualidades-label"></span><span class="result-value" id="result-pagos-obra"></span></p>
@@ -142,15 +169,15 @@ fbq('track', 'PageView');
           <section class="result-section"><h3 class="section-heading">Fase de obra</h3><div class="phase-grid">
             <p class="result-item"><span class="result-label">Capital aportado en obra</span><span class="result-value" id="result-capital-obra"></span></p>
             <p class="result-item"><span class="result-label">Ganancia por plusvalía</span><span class="result-value" id="result-ganancia"></span></p>
-            <p class="result-item"><span class="result-label">ROI real · sobre lo aportado en obra</span><span class="result-value" id="result-roi"></span></p>
+            <p class="result-item"><span class="result-label">ROI en obra &middot; en el plazo total, no anual &middot; sobre lo aportado en obra</span><span class="result-value" id="result-roi"></span></p>
             <p class="result-item"><span class="result-label">Valor estimado a la entrega</span><span class="result-value" id="result-valor-entrega"></span></p>
           </div></section>
           <section class="result-section"><p class="mono phase-eyebrow">A partir de la entrega</p><h3 class="section-heading">Si conservas y rentas</h3><div class="phase-grid">
             <p class="result-item"><span class="result-label">Renta mensual estimada &middot; 4.5&ndash;6% anual del valor</span><span class="result-value" id="result-renta-mensual"></span></p>
             <p class="result-item"><span class="result-label">Renta anual estimada</span><span class="result-value" id="result-renta-anual"></span></p>
-            <p class="result-item star"><span class="result-value" id="result-rendimiento-total"></span><span class="result-label">Rendimiento total anual estimado</span><span class="result-note">A partir de la entrega, si conservas el depa.</span></p>
+            <p class="result-item star"><span class="result-value" id="result-rendimiento-total"></span><span class="result-label">Rendimiento total anual estimado &middot; bruto, antes de gastos, sobre tu inversi&oacute;n total</span><span class="result-note">A partir de la entrega, si conservas y rentas el depa.</span></p>
           </div></section>
-          <p class="disclaimer">Renta estimada: 4.5&ndash;6% anual del valor a la entrega, referencia de mercado en Monterrey. Estimaciones ilustrativas. No constituye asesor&iacute;a financiera.</p>
+          <p class="disclaimer">Renta estimada: 4.5&ndash;6% anual del valor a la entrega, referencia de mercado en Monterrey. Rendimiento bruto, antes de gastos (mantenimiento, predial, vacancia). Estimaciones ilustrativas. No constituye asesor&iacute;a financiera.</p>
         </div>
       </div>
     </section>
@@ -161,174 +188,179 @@ fbq('track', 'PageView');
       <p class="mono" style="margin-top:22px"><a href="/#calculadora">¿Aún no sabes tu presupuesto? → Calculadora de presupuesto</a></p>
     </div></section>
   </main>
-  <script type="module" id="roi-module">
-    export function monthsUntil(yyyyMm, now) {
-      const [year, month] = yyyyMm.split("-").map(Number);
-      return (year - now.getFullYear()) * 12 + (month - (now.getMonth() + 1));
-    }
+  <script id="roi-script">
+    (function () {
+      "use strict";
 
-    export function validateRoiInputs(rawFields, now = new Date()) {
-      const fields = rawFields ?? {};
-      const errors = {};
-      const values = {};
+      /* ---------- estado: sliders + valores exactos editables ---------- */
+      var KEYS = ["precio", "eng", "nmen", "men", "plazo", "plus"];
+      var exact = { precio: null, eng: null, nmen: null, men: null, plazo: null, plus: null };
 
-      function normalize(key) {
-        const rawValue = fields[key];
-        if (typeof rawValue === "string") {
-          const stripped = rawValue.replace(/[\s$%,]/g, "");
-          if (!/^-?(\d+\.?\d*|\.\d+)$/.test(stripped)) return null;
-          const number = Number(stripped);
-          return Number.isFinite(number) ? number + 0 : null;
+      function sliderOf(k) { return document.getElementById("s-" + k); }
+      function spanOf(k) { return document.getElementById("v-" + k); }
+
+      function val(k) {
+        return exact[k] !== null ? exact[k] : Number(sliderOf(k).value);
+      }
+
+      function formatMXN(n) {
+        return new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 }).format(n);
+      }
+      function formatPct(n) {
+        return n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %";
+      }
+
+      function refreshLabels() {
+        spanOf("precio").textContent = formatMXN(val("precio"));
+        spanOf("eng").textContent = formatMXN(val("eng"));
+        spanOf("nmen").textContent = String(val("nmen"));
+        spanOf("men").textContent = formatMXN(val("men"));
+        spanOf("plazo").textContent = val("plazo") + (val("plazo") === 1 ? " mes" : " meses");
+        spanOf("plus").textContent = val("plus") + "% anual";
+      }
+
+      KEYS.forEach(function (k) {
+        sliderOf(k).addEventListener("input", function () {
+          exact[k] = null;
+          refreshLabels();
+        });
+      });
+
+      /* ---------- cifras editables (mismo patrón que la landing) ---------- */
+      function parseDigits(str) { return parseInt(String(str).replace(/[^0-9]/g, ""), 10) || 0; }
+
+      KEYS.forEach(function (k) {
+        var span = spanOf(k);
+        function startEdit() {
+          var current = val(k);
+          span.setAttribute("contenteditable", "true");
+          span.textContent = current === 0 ? "0" : String(current);
+          span.focus();
+          var range = document.createRange();
+          range.selectNodeContents(span);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
         }
-        return typeof rawValue === "number" && Number.isFinite(rawValue) ? rawValue + 0 : null;
+        span.addEventListener("click", startEdit);
+        span.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            if (span.getAttribute("contenteditable") === "true") span.blur();
+            else startEdit();
+          }
+        });
+        span.addEventListener("keypress", function (e) {
+          if (!/[0-9]/.test(e.key)) e.preventDefault();
+        });
+        span.addEventListener("blur", function () {
+          if (span.getAttribute("contenteditable") !== "true") return;
+          span.setAttribute("contenteditable", "false");
+          var raw = parseDigits(span.textContent);
+          var minV = parseInt(span.dataset.min, 10);
+          var maxV = parseInt(span.dataset.max, 10);
+          exact[k] = Math.max(minV, Math.min(maxV, raw));
+          var s = sliderOf(k);
+          s.value = Math.max(Number(s.min), Math.min(Number(s.max), exact[k]));
+          refreshLabels();
+        });
+      });
+
+      /* ---------- prefill vía URL (?precio=&eng=&nmen=&men=&plazo=&plus=) ---------- */
+      var params = new URLSearchParams(window.location.search);
+      var hasPrefill = false;
+      KEYS.forEach(function (k) {
+        if (!params.has(k)) return;
+        var raw = parseInt(params.get(k), 10);
+        if (!isFinite(raw) || raw < 0) return;
+        var span = spanOf(k);
+        var minV = parseInt(span.dataset.min, 10);
+        var maxV = parseInt(span.dataset.max, 10);
+        exact[k] = Math.max(minV, Math.min(maxV, raw));
+        var s = sliderOf(k);
+        s.value = Math.max(Number(s.min), Math.min(Number(s.max), exact[k]));
+        hasPrefill = true;
+      });
+      refreshLabels();
+
+      /* ---------- cálculo ---------- */
+      function computeRoi(v) {
+        var pagosObra = v.nmen * v.men;
+        var liquidacion = v.precio - v.eng - pagosObra;
+        var capitalObra = v.eng + pagosObra;
+        var valorEntrega = v.precio * Math.pow(1 + v.plus / 100, v.plazo / 12);
+        var gananciaPlusvalia = valorEntrega - v.precio;
+        var roiRealPct = gananciaPlusvalia / capitalObra * 100;
+        var RENTA_YIELD_MIN = 0.045, RENTA_YIELD_MAX = 0.06; /* referencia Monterrey: premium 4.4-4.5%, promedio ciudad 6.47% */
+        var rentaAnualMin = valorEntrega * RENTA_YIELD_MIN;
+        var rentaAnualMax = valorEntrega * RENTA_YIELD_MAX;
+        var plusvaliaAnualMonto = valorEntrega * v.plus / 100;
+        return {
+          pagosObra: pagosObra, liquidacion: liquidacion, capitalObra: capitalObra,
+          valorEntrega: valorEntrega, gananciaPlusvalia: gananciaPlusvalia, roiRealPct: roiRealPct,
+          rentaAnualMin: rentaAnualMin, rentaAnualMax: rentaAnualMax,
+          rentaMensualMin: rentaAnualMin / 12, rentaMensualMax: rentaAnualMax / 12,
+          rendimientoTotalMinPct: (rentaAnualMin + plusvaliaAnualMonto) / v.precio * 100,
+          rendimientoTotalMaxPct: (rentaAnualMax + plusvaliaAnualMonto) / v.precio * 100
+        };
       }
 
-      const precio = normalize("precio");
-      if (precio === null) errors.precio = "Ingresa el precio de lista.";
-      else if (precio <= 0 || precio > 1_000_000_000) errors.precio = "El precio debe ser mayor a 0 y hasta $1,000,000,000.";
-      else values.precio = precio;
-
-      const enganche = normalize("enganche");
-      if (enganche === null) errors.enganche = "Ingresa el enganche.";
-      else if (enganche <= 0 || enganche > 1_000_000_000) errors.enganche = "El enganche debe ser mayor a 0 y hasta $1,000,000,000.";
-      else values.enganche = enganche;
-
-      const numMensualidades = normalize("numMensualidades");
-      if (numMensualidades === null) errors.numMensualidades = "Indica cuántas mensualidades son.";
-      else if (!Number.isInteger(numMensualidades) || numMensualidades < 0 || numMensualidades > 120) errors.numMensualidades = "Las mensualidades deben ser un entero de 0 a 120.";
-      else values.numMensualidades = numMensualidades;
-
-      const montoMensual = normalize("montoMensual");
-      if (montoMensual === null) errors.montoMensual = "Indica el monto de cada mensualidad.";
-      else if (montoMensual < 0 || montoMensual > 10_000_000) errors.montoMensual = "El monto mensual debe estar entre $0 y $10,000,000.";
-      else values.montoMensual = montoMensual;
-
-      const fechaEntrega = fields.fechaEntrega;
-      if (typeof fechaEntrega !== "string" || fechaEntrega.length === 0) errors.fechaEntrega = "Indica la fecha de entrega.";
-      else if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(fechaEntrega)) errors.fechaEntrega = "Usa el formato AAAA-MM.";
-      else {
-        const mesesEntrega = monthsUntil(fechaEntrega, now);
-        if (mesesEntrega < 1 || mesesEntrega > 120) errors.fechaEntrega = "La entrega debe ser entre el próximo mes y 10 años.";
-        else values.mesesEntrega = mesesEntrega;
+      function mesEntregaTexto(plazoMeses) {
+        var d = new Date();
+        d.setMonth(d.getMonth() + plazoMeses);
+        return d.toLocaleDateString("es-MX", { month: "long", year: "numeric" });
       }
 
-      const plusvaliaPct = normalize("plusvaliaPct");
-      if (plusvaliaPct === null) errors.plusvaliaPct = "Ingresa la plusvalía anual.";
-      else if (plusvaliaPct < 0 || plusvaliaPct > 50) errors.plusvaliaPct = "La plusvalía anual debe estar entre 0 y 50%.";
-      else values.plusvaliaPct = plusvaliaPct;
-
-      const precioPassed = !("precio" in errors);
-      const enganchePassed = !("enganche" in errors);
-      const numMensualidadesPassed = !("numMensualidades" in errors);
-      const montoMensualPassed = !("montoMensual" in errors);
-
-      if (precioPassed && enganchePassed && enganche > precio) {
-        errors.enganche = "El enganche no puede exceder el precio.";
-      }
-      if (numMensualidadesPassed && montoMensualPassed && numMensualidades > 0 && montoMensual <= 0) {
-        errors.montoMensual = "Indica el monto de cada mensualidad.";
-      }
-      if (precioPassed && enganchePassed && numMensualidadesPassed && montoMensualPassed && precio - enganche - numMensualidades * montoMensual < 0) {
-        errors.plan = "Los pagos superan el precio: ajusta enganche o mensualidades.";
-      }
-
-      return { valid: Object.keys(errors).length === 0, errors, values };
-    }
-
-    export function computeRoi(values) {
-      const pagosObra = values.numMensualidades * values.montoMensual;
-      const liquidacion = values.precio - values.enganche - pagosObra;
-      const capitalObra = values.enganche + pagosObra;
-      const valorEntrega = values.precio * (1 + values.plusvaliaPct / 100) ** (values.mesesEntrega / 12);
-      const gananciaPlusvalia = valorEntrega - values.precio;
-      const roiRealPct = gananciaPlusvalia / capitalObra * 100;
-      const RENTA_YIELD_MIN = 0.045, RENTA_YIELD_MAX = 0.06; // referencia de mercado Monterrey (zonas premium 4.4-4.5%, promedio ciudad 6.47%)
-      const rentaAnualMin = valorEntrega * RENTA_YIELD_MIN;
-      const rentaAnualMax = valorEntrega * RENTA_YIELD_MAX;
-      const rentaMensualMin = rentaAnualMin / 12;
-      const rentaMensualMax = rentaAnualMax / 12;
-      const plusvaliaAnualMonto = valorEntrega * values.plusvaliaPct / 100;
-      const rendimientoTotalMinPct = (rentaAnualMin + plusvaliaAnualMonto) / values.precio * 100;
-      const rendimientoTotalMaxPct = (rentaAnualMax + plusvaliaAnualMonto) / values.precio * 100;
-      return { pagosObra, liquidacion, capitalObra, valorEntrega, gananciaPlusvalia, roiRealPct, rentaAnualMin, rentaAnualMax, rentaMensualMin, rentaMensualMax, rendimientoTotalMinPct, rendimientoTotalMaxPct };
-    }
-
-    export function formatMXN(n) {
-      return new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 }).format(n);
-    }
-
-    export function formatPct(n) {
-      return n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %";
-    }
-
-    export function buildWhatsAppLink(values, fechaEntrega, projection) {
-      const [year, month] = fechaEntrega.split("-").map(Number);
-      const mesEntrega = new Date(year, month - 1, 1).toLocaleDateString("es-MX", { month: "long", year: "numeric" });
-      let message = `Hola Diego, corrí un escenario en tu calculadora: precio de lista de ${formatMXN(values.precio)}, mensualidades de ${formatMXN(values.montoMensual)} y entrega en ${mesEntrega}.`;
-      if (projection) {
-        message += ` Me salió un ROI en obra de ${formatPct(projection.roiRealPct)} y un rendimiento total estimado de ${formatPct(projection.rendimientoTotalMinPct)} a ${formatPct(projection.rendimientoTotalMaxPct)} anual si lo rento.`;
-      }
-      message += ` Me gustaría platicar qué estrategia me conviene.`;
-      return "https://wa.me/528132407191?text=" + encodeURIComponent(message);
-    }
-
-    if (typeof document !== "undefined") {
-      const form = document.getElementById("roi-form");
-      const results = document.getElementById("results");
-      const emptyState = document.getElementById("results-empty");
-
-      function formatMoneyInput(input) {
-        const caret = input.selectionStart ?? input.value.length;
-        const digitsBeforeCaret = (input.value.slice(0, caret).match(/\d/g) ?? []).length;
-        const digits = input.value.replace(/\D/g, "");
-        if (!digits) { input.value = ""; return; }
-        input.value = "$" + digits.replace(/^0+(?=\d)/, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        let nextCaret = digitsBeforeCaret === 0 ? 1 : input.value.length;
-        let seen = 0;
-        for (let index = 0; index < input.value.length; index += 1) {
-          if (/\d/.test(input.value[index])) seen += 1;
-          if (seen === digitsBeforeCaret) { nextCaret = index + 1; break; }
+      function buildWhatsAppLink(v, projection) {
+        var message = "Hola Diego, corrí un escenario en tu calculadora: precio de lista de " + formatMXN(v.precio) +
+          ", " + v.nmen + " mensualidades de " + formatMXN(v.men) + " y entrega en " + mesEntregaTexto(v.plazo) + ".";
+        if (projection) {
+          message += " Me salió un ROI en obra de " + formatPct(projection.roiRealPct) +
+            " y un rendimiento total estimado de " + formatPct(projection.rendimientoTotalMinPct) +
+            " a " + formatPct(projection.rendimientoTotalMaxPct) + " anual bruto si lo rento.";
         }
-        input.setSelectionRange(nextCaret, nextCaret);
+        message += " Me gustaría platicar qué estrategia me conviene.";
+        return "https://wa.me/528132407191?text=" + encodeURIComponent(message);
       }
 
-      for (const key of ["precio", "enganche", "montoMensual", "rentaMensual"]) {
-        document.getElementById(key)?.addEventListener("input", (event) => formatMoneyInput(event.currentTarget));
-      }
-
-      const gatePanel = document.getElementById("gate-roi");
-      const teaserPanel = document.getElementById("teaser-roi");
-      let pendingRender = null;
-
-      function renderTeaser(projection) {
-        const set = (id, value) => { document.getElementById(id).textContent = value; };
-        set("teaser-rendimiento", formatPct(projection.rendimientoTotalMinPct) + " \u2013 " + formatPct(projection.rendimientoTotalMaxPct));
-        emptyState.hidden = true; results.hidden = true;
-        teaserPanel.hidden = false; gatePanel.hidden = false;
-      }
+      /* ---------- flujo 2 pasos: teaser → gate → desglose ---------- */
+      var form = document.getElementById("roi-form");
+      var results = document.getElementById("results");
+      var emptyState = document.getElementById("results-empty");
+      var gatePanel = document.getElementById("gate-roi");
+      var teaserPanel = document.getElementById("teaser-roi");
+      var planErr = document.getElementById("plan-err");
+      var pendingRender = null;
 
       function gateData() {
         try { return JSON.parse(localStorage.getItem("dcd_gate")) || null; } catch (e) { return null; }
       }
 
-      function buildLeadNote(values, projection, rawFields) {
-        const g = gateData() || {};
+      function renderTeaser(projection) {
+        document.getElementById("teaser-rendimiento").textContent =
+          formatPct(projection.rendimientoTotalMinPct) + " – " + formatPct(projection.rendimientoTotalMaxPct);
+        emptyState.hidden = true; results.hidden = true;
+        teaserPanel.hidden = false; gatePanel.hidden = false;
+      }
+
+      function buildLeadNote(v, projection) {
+        var g = gateData() || {};
         return "CALC ROI depascondiego.mx\n" +
           "Nombre: " + (g.n || "no proporcionado") + "\n" +
           "WhatsApp: " + (g.w || "no proporcionado") + "\n" +
-          "Precio: " + formatMXN(values.precio) + "\n" +
-          "Enganche: " + formatMXN(values.enganche) + "\n" +
-          "Mensualidades: " + values.numMensualidades + " de " + formatMXN(values.montoMensual) + "\n" +
-          "Entrega: " + rawFields.fechaEntrega + " (" + values.mesesEntrega + " meses)\n" +
-          "Plusvalia est.: " + values.plusvaliaPct + "% anual\n" +
+          "Precio: " + formatMXN(v.precio) + "\n" +
+          "Enganche: " + formatMXN(v.eng) + "\n" +
+          "Mensualidades: " + v.nmen + " de " + formatMXN(v.men) + "\n" +
+          "Entrega: en " + v.plazo + " meses (" + mesEntregaTexto(v.plazo) + ")\n" +
+          "Plusvalia est.: " + v.plus + "% anual\n" +
           "Renta est. (4.5-6% del valor): " + formatMXN(projection.rentaMensualMin) + " - " + formatMXN(projection.rentaMensualMax) + "/mes\n" +
           "ROI en obra: " + formatPct(projection.roiRealPct) + "\n" +
-          "Rendimiento total anual: " + formatPct(projection.rendimientoTotalMinPct) + " - " + formatPct(projection.rendimientoTotalMaxPct);
+          "Rendimiento total anual (bruto): " + formatPct(projection.rendimientoTotalMinPct) + " - " + formatPct(projection.rendimientoTotalMaxPct);
       }
 
-      function sendLead(values, projection, rawFields) {
+      function sendLead(v, projection) {
         if (typeof LEADS_ENDPOINT === "undefined") return;
-        const g = gateData() || {};
+        var g = gateData() || {};
         fetch(LEADS_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -336,81 +368,87 @@ fbq('track', 'PageView');
             lead_name: "Lead ROI — " + (g.n || "escenario anonimo"),
             name: g.n || "",
             phone: g.w || "",
-            note: buildLeadNote(values, projection, rawFields),
-          }),
-        }).catch(() => {});
+            note: buildLeadNote(v, projection)
+          })
+        }).catch(function () {});
       }
 
-      function renderResults(validation, projection, rawFields) {
-        const set = (id, value) => { document.getElementById(id).textContent = value; };
-        set("result-enganche", formatMXN(validation.values.enganche));
-        set("result-mensualidades-label", `${validation.values.numMensualidades} mensualidades de ${formatMXN(validation.values.montoMensual)} =`);
+      function renderResults(v, projection) {
+        var set = function (id, value) { document.getElementById(id).textContent = value; };
+        set("result-enganche", formatMXN(v.eng));
+        set("result-mensualidades-label", v.nmen + " mensualidades de " + formatMXN(v.men) + " =");
         set("result-pagos-obra", formatMXN(projection.pagosObra));
         set("result-liquidacion", formatMXN(projection.liquidacion));
-        set("result-entrega", `Entrega en ${validation.values.mesesEntrega} meses`);
+        set("result-entrega", "Entrega en " + v.plazo + " meses");
         set("result-capital-obra", formatMXN(projection.capitalObra));
         set("result-ganancia", formatMXN(projection.gananciaPlusvalia));
         set("result-roi", formatPct(projection.roiRealPct));
         set("result-valor-entrega", formatMXN(projection.valorEntrega));
-        set("result-renta-mensual", formatMXN(projection.rentaMensualMin) + " \u2013 " + formatMXN(projection.rentaMensualMax));
-        set("result-renta-anual", formatMXN(projection.rentaAnualMin) + " \u2013 " + formatMXN(projection.rentaAnualMax));
-        set("result-rendimiento-total", formatPct(projection.rendimientoTotalMinPct) + " \u2013 " + formatPct(projection.rendimientoTotalMaxPct));
-        document.getElementById("cta-whatsapp").href = buildWhatsAppLink(validation.values, rawFields.fechaEntrega, projection);
+        set("result-renta-mensual", formatMXN(projection.rentaMensualMin) + " – " + formatMXN(projection.rentaMensualMax));
+        set("result-renta-anual", formatMXN(projection.rentaAnualMin) + " – " + formatMXN(projection.rentaAnualMax));
+        set("result-rendimiento-total", formatPct(projection.rendimientoTotalMinPct) + " – " + formatPct(projection.rendimientoTotalMaxPct));
+        var waLink = buildWhatsAppLink(v, projection);
+        document.getElementById("cta-whatsapp").href = waLink;
+        document.getElementById("results-wa").href = waLink;
         emptyState.hidden = true; gatePanel.hidden = true; teaserPanel.hidden = true; results.hidden = false;
-        sendLead(validation.values, projection, rawFields);
+        sendLead(v, projection);
       }
 
       window.gateRoiSubmit = function () {
-        const n = document.getElementById("gate-n-roi").value.trim();
-        let w = document.getElementById("gate-w-roi").value.replace(/\D/g, "");
-        const em = document.getElementById("gate-e-roi").value.trim();
-        const c = document.getElementById("gate-c-roi").checked;
-        const hp = document.getElementById("gate-hp-roi").value;
-        const err = document.getElementById("gate-err-roi");
-        const showErr = (m) => { err.textContent = m; err.style.display = "block"; };
-        if (hp) { if (pendingRender) renderResults(pendingRender.validation, pendingRender.projection, pendingRender.rawFields); return; }
+        var n = document.getElementById("gate-n-roi").value.trim();
+        var w = document.getElementById("gate-w-roi").value.replace(/\D/g, "");
+        var em = document.getElementById("gate-e-roi").value.trim();
+        var c = document.getElementById("gate-c-roi").checked;
+        var hp = document.getElementById("gate-hp-roi").value;
+        var err = document.getElementById("gate-err-roi");
+        var showErr = function (m) { err.textContent = m; err.style.display = "block"; };
+        if (hp) { if (pendingRender) renderResults(pendingRender.v, pendingRender.projection); return; }
         if (w.length === 12 && w.indexOf("52") === 0) w = w.slice(2);
         if (w.length === 13 && w.indexOf("521") === 0) w = w.slice(3);
         if (!n) return showErr("Falta tu nombre");
-        if (w.length !== 10) return showErr("WhatsApp: deben ser 10 d\u00edgitos");
+        if (w.length !== 10) return showErr("WhatsApp: deben ser 10 dígitos");
         if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return showErr("Revisa el correo");
         if (!c) return showErr("Acepta el aviso de privacidad");
         err.style.display = "none";
         try { localStorage.setItem("dcd_gate", JSON.stringify({ n: n, w: w, ts: Date.now() })); } catch (e) {}
         if (typeof fbq !== "undefined") fbq("track", "Lead", { content_name: "gate_roi", content_category: "herramientas" });
         if (pendingRender) {
-          renderResults(pendingRender.validation, pendingRender.projection, pendingRender.rawFields);
+          renderResults(pendingRender.v, pendingRender.projection);
           pendingRender = null;
         }
       };
 
-      form?.addEventListener("submit", (event) => {
-        event.preventDefault();
-        for (const errorSpan of document.querySelectorAll(".field-error")) errorSpan.textContent = "";
-        const rawFields = Object.fromEntries(new FormData(form));
-        const validation = validateRoiInputs(rawFields);
-        for (const input of form.querySelectorAll("input[name]")) {
-          if (input.name in validation.errors) input.setAttribute("aria-invalid", "true");
-          else input.removeAttribute("aria-invalid");
-        }
-        if (!validation.valid) {
-          for (const [key, message] of Object.entries(validation.errors)) {
-            const errorSpan = document.getElementById(`error-${key}`);
-            if (errorSpan) errorSpan.textContent = message;
-          }
-          results.hidden = true; gatePanel.hidden = true; teaserPanel.hidden = true; emptyState.hidden = false; return;
-        }
-        const projection = computeRoi(validation.values);
-        if (typeof fbq !== "undefined") fbq("trackCustom", "ROICalculado", { content_name: "calculadora_roi" });
-        if (!gateData()) {
-          pendingRender = { validation, projection, rawFields };
-          renderTeaser(projection);
-          sendLead(validation.values, projection, rawFields);
+      function runCalc() {
+        planErr.style.display = "none";
+        var v = { precio: val("precio"), eng: val("eng"), nmen: val("nmen"), men: val("men"), plazo: val("plazo"), plus: val("plus") };
+        if (v.eng > v.precio) {
+          planErr.textContent = "El enganche no puede exceder el precio.";
+          planErr.style.display = "block";
           return;
         }
-        renderResults(validation, projection, rawFields);
+        if (v.precio - v.eng - v.nmen * v.men < 0) {
+          planErr.textContent = "Los pagos superan el precio: ajusta enganche o mensualidades.";
+          planErr.style.display = "block";
+          return;
+        }
+        var projection = computeRoi(v);
+        if (typeof fbq !== "undefined") fbq("trackCustom", "ROICalculado", { content_name: "calculadora_roi" });
+        if (!gateData()) {
+          pendingRender = { v: v, projection: projection };
+          renderTeaser(projection);
+          sendLead(v, projection);
+          return;
+        }
+        renderResults(v, projection);
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        runCalc();
       });
-    }
+
+      if (hasPrefill) runCalc();
+    })();
   </script>
 </body>
 </html>
