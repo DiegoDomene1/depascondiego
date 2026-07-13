@@ -244,11 +244,10 @@ em{font-style:italic}
 .calc-val-edit:hover{border-color:var(--verde)}
 .calc-val-edit:focus{outline:none;border-color:var(--verde);border-bottom:1.5px solid var(--verde)}
 .calc-hint{font-family:var(--ff-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gris);margin:0 0 14px;display:flex;align-items:center;gap:6px}
-.ret-sum{border:0.5px solid rgba(20,20,20,0.12);border-radius:2px;overflow:hidden;background:rgba(255,255,255,0.35)}
-.ret-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 14px;border-top:0.5px solid rgba(20,20,20,0.08)}
-.ret-row:first-child{border-top:0}
-.ret-l{font-family:var(--ff-m);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gris)}
-.ret-n{font-family:var(--ff-d);font-size:17px;font-weight:300;color:var(--verde);text-align:right}
+.ret-preset{font-family:var(--ff-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 12px;border-radius:20px;border:0.5px solid rgba(242,238,230,0.25);background:transparent;color:rgba(242,238,230,0.62);cursor:pointer;transition:all 0.2s}
+.ret-preset:hover{border-color:var(--oro)}
+.ret-preset.active{background:var(--oro);border-color:var(--oro);color:var(--tinta)}
+.ret-preset:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
 .calc-field{margin-bottom:16px}
 .calc-field label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--gris);margin-bottom:7px}
 .calc-field label span{font-family:var(--ff-d);font-size:16px;font-weight:300;color:var(--tinta)}
@@ -496,9 +495,8 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
       <div class="nav-tools" id="nav-tools">
         <button class="nav-link nav-tools-btn" aria-expanded="false" aria-haspopup="true" onclick="toggleTools(event)">Herramientas <span aria-hidden="true" style="font-size:8px">&#9662;</span></button>
         <div class="nav-tools-menu" role="menu" aria-label="Herramientas">
-          <a href="#calculadora" class="nav-link" role="menuitem">Presupuesto &middot; cu&aacute;nto invertir</a>
-          <a href="#retorno" class="nav-link" role="menuitem">Retorno &middot; plusval&iacute;a estimada</a>
-          <a href="/calculadora-roi.html" class="nav-link" role="menuitem">ROI detallado &middot; con renta</a>
+          <a href="#calculadora" class="nav-link" role="menuitem">Calculadora &middot; presupuesto y retorno</a>
+          <a href="/calculadora-roi.html" class="nav-link" role="menuitem">ROI detallado &middot; p&aacute;gina para compartir</a>
         </div>
       </div>
       <a href="#proceso" class="nav-link">Método</a>
@@ -741,14 +739,14 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
   <div class="container">
     <div class="calc-grid">
       <div class="reveal-left">
-        <p class="mono">Calculadora de presupuesto</p>
+        <p class="mono">Calculadora &middot; presupuesto y retorno</p>
         <h2 class="calc-h2">Define tu<br>presupuesto<br><em>ideal<span style="color:var(--barro)">.</span></em></h2>
         <p class="calc-body">Combina tu enganche, mensualidades y liquidación para saber qué proyecto encaja con tu situación real. Sin compromiso — juega con los números las veces que quieras.</p>
         <div class="calc-feats">
           <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Ingresa lo que estés cómodo en dar — tú decides los montos</div></div>
           <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Opción de estimar mensualidad con crédito hipotecario</div></div>
           <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Los proyectos se iluminan según tu presupuesto real</div></div>
-          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Rango estimado con ±10% de variación</div></div>
+          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Al final, tu retorno estimado &mdash; renta y plusval&iacute;a con los mismos n&uacute;meros</div></div>
         </div>
       </div>
       <div class="calc-widget reveal-right">
@@ -805,7 +803,32 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
             <span class="calc-pill" id="cp-west2">WEST 2</span>
             <span class="calc-pill" id="cp-rise">RISE</span>
           </div>
-          <button class="calc-cta" onclick="calcContacto()">Quiero asesoría con este presupuesto →</button>
+          <div id="ret-hook">
+          <button class="calc-cta" onclick="retFlowOpen()">&iquest;Cu&aacute;nto te puede dejar? Calcular mi retorno &rarr;</button>
+          <p style="font-family:var(--ff-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(242,238,230,0.5);text-align:center;margin-top:8px">Usa los n&uacute;meros que ya diste &middot; una sola pregunta m&aacute;s</p>
+          <button class="calc-cta" onclick="calcContacto()" style="background:transparent;border:0.5px solid rgba(242,238,230,0.3);margin-top:10px">Quiero asesor&iacute;a con este presupuesto &rarr;</button>
+          </div>
+          <div id="ret-paso2" style="display:none;margin-top:16px;border-top:0.5px solid rgba(242,238,230,0.15);padding-top:16px">
+          <p class="calc-slabel" style="color:rgba(242,238,230,0.62)">02 &middot; Tu retorno &middot; <span id="ret-f-base" style="color:var(--oro)">&mdash;</span></p>
+          <div class="calc-field">
+            <label style="color:rgba(242,238,230,0.55)">&iquest;Qu&eacute; plusval&iacute;a anual esperas? <span id="ret-plus-v" style="font-family:var(--ff-d);font-size:16px;color:var(--oro)">7% anual</span></label>
+            <input type="range" id="ret-plus" min="4" max="12" step="1" value="7" style="accent-color:var(--oro)" oninput="retPlus=parseInt(this.value);retFlowPresetSync();retFlowSync()" aria-label="Plusval&iacute;a anual esperada">
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 14px">
+            <button type="button" class="ret-preset" data-p="5" onclick="retFlowSetPlus(this)">Conservador 5%</button>
+            <button type="button" class="ret-preset active" data-p="7" onclick="retFlowSetPlus(this)">Realista 7%</button>
+            <button type="button" class="ret-preset" data-p="10" onclick="retFlowSetPlus(this)">Optimista 10%</button>
+          </div>
+          <div class="calc-bkd" style="grid-template-columns:1fr 1fr">
+            <div class="cb"><div class="cb-n" id="ret-f-renta">&mdash;</div><div class="cb-l">Renta esperada/mes &middot; 4.5&ndash;6%</div></div>
+            <div class="cb"><div class="cb-n" id="ret-f-valor">&mdash;</div><div class="cb-l">Valor a la entrega</div></div>
+          </div>
+          <div class="calc-result-range" id="ret-f-total">&mdash;</div>
+          <div class="calc-result-label">Rendimiento total anual &middot; bruto, antes de gastos, sobre tu inversi&oacute;n</div>
+          <p style="font-family:var(--ff-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(242,238,230,0.5);margin:-8px 0 14px;line-height:1.6">A partir de la entrega, si conservas y rentas. La plusval&iacute;a hist&oacute;rica no garantiza resultados futuros.</p>
+          <button class="calc-cta" onclick="retFlowContacto()">Platicar estos n&uacute;meros por WhatsApp &rarr;</button>
+          <a id="ret-full-link" href="/calculadora-roi.html" style="display:block;margin-top:12px;font-family:var(--ff-m);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--oro);text-decoration:none">Ver desglose completo &middot; p&aacute;gina para compartir &rarr;</a>
+          </div>
           </div>
         <div class="gate-form" id="gate-form-p">
           <p class="calc-slabel" style="color:rgba(242,238,230,0.62)">Desbloquea tu an&aacute;lisis completo</p>
@@ -872,37 +895,6 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
           src="https://maps.google.com/maps?q=25.6715685,-100.3475935&z=16&hl=es&output=embed"
           loading="lazy">
         </iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RETORNO -->
-<section class="calc-section" id="retorno" style="background:var(--bone)">
-  <div class="container">
-    <div class="calc-grid">
-      <div class="reveal-left">
-        <p class="mono">Herramientas &middot; Calculadora de retorno</p>
-        <h2 class="calc-h2">Tu retorno,<br>antes de<br><em>firmar<span style="color:var(--barro)">.</span></em></h2>
-        <p class="calc-body">Plusval&iacute;a en obra, renta a la entrega y rendimiento total: la proyecci&oacute;n completa vive en su propia calculadora. Me llevo los n&uacute;meros de tu presupuesto para que no tengas que volver a escribirlos.</p>
-        <div class="calc-feats">
-          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Plusval&iacute;a de preventa a entrega seg&uacute;n el plazo del proyecto</div></div>
-          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Renta mensual estimada a partir de la entrega (4.5&ndash;6% del valor)</div></div>
-          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Rendimiento bruto, antes de gastos, sobre tu inversi&oacute;n total &mdash; sin inflar n&uacute;meros</div></div>
-          <div class="calc-feat"><div class="calc-feat-dot"></div><div class="calc-feat-text">Sin compromiso &mdash; ajusta los escenarios las veces que quieras</div></div>
-        </div>
-      </div>
-      <div class="calc-widget reveal-right">
-        <p class="calc-slabel">Tu escenario &middot; tomado de tu presupuesto</p>
-        <div class="ret-sum">
-          <div class="ret-row"><span class="ret-l">Presupuesto total</span><span class="ret-n" id="ret-sum-total">&mdash;</span></div>
-          <div class="ret-row"><span class="ret-l">Enganche</span><span class="ret-n" id="ret-sum-eng">&mdash;</span></div>
-          <div class="ret-row"><span class="ret-l">Mensualidades</span><span class="ret-n" id="ret-sum-men">&mdash;</span></div>
-          <div class="ret-row"><span class="ret-l">Plazo a la entrega</span><span class="ret-n" id="ret-sum-plazo">&mdash;</span></div>
-        </div>
-        <p style="font-size:12px;color:var(--gris);line-height:1.6;margin:14px 0 18px">&iquest;No son tus n&uacute;meros? Mu&eacute;velos en la <a href="#calculadora" style="color:var(--verde);text-decoration:underline">calculadora de presupuesto</a> y aqu&iacute; se actualizan solos.</p>
-        <a class="calc-cta" id="ret-link" href="/calculadora-roi.html" style="display:block;text-align:center;text-decoration:none">Calcular mi retorno completo &rarr;</a>
-        <p style="font-family:var(--ff-m);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gris);margin-top:12px;line-height:1.6">Plusval&iacute;a en obra &middot; renta estimada &middot; rendimiento total &mdash; en una p&aacute;gina que puedes compartir</p>
       </div>
     </div>
   </div>
@@ -1212,7 +1204,7 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
 
     var base = e + (m * plazoMeses) + l + h;
     window.dcdBudget = { e: e, m: m, plazo: plazoMeses, l: l, h: h, base: base };
-    if (typeof retEntrySync === 'function') retEntrySync();
+    if (typeof retFlowSync === 'function') retFlowSync();
     var low  = Math.round(base * 0.90 / 100000) * 100000;
     var high = Math.round(base * 1.10 / 100000) * 100000;
 
@@ -1452,19 +1444,78 @@ document.addEventListener('click', function(ev){
   if (t && !t.contains(ev.target)) closeTools();
 });
 
-/* RETORNO — entrada ligera prellenada desde la calculadora de presupuesto */
-function retEntrySync(){
-  var b = window.dcdBudget;
-  var link = document.getElementById('ret-link');
-  if (!link || !b) return;
-  var f = function(n){ return '$' + Math.round(n).toLocaleString('es-MX'); };
-  document.getElementById('ret-sum-total').textContent = f(b.base);
-  document.getElementById('ret-sum-eng').textContent = f(b.e);
-  document.getElementById('ret-sum-men').textContent = b.plazo === 0 || b.m === 0 ? 'Sin mensualidades' : b.plazo + ' \u00d7 ' + f(b.m);
-  document.getElementById('ret-sum-plazo').textContent = b.plazo === 0 ? 'Entrega inmediata' : (b.plazo === 12 ? '1 a\u00f1o' : (b.plazo/12) + ' a\u00f1os');
-  link.setAttribute('href', '/calculadora-roi.html?precio=' + b.base + '&eng=' + b.e + '&nmen=' + (b.m > 0 ? b.plazo : 0) + '&men=' + b.m + '&plazo=' + Math.max(1, b.plazo));
+/* RETORNO INTEGRADO — paso 02 dentro de la calculadora */
+var retPlus = 7;
+function retFmt(n){ return '$' + Math.round(n).toLocaleString('es-MX'); }
+function retFlowOpen(){
+  document.getElementById('ret-hook').style.display = 'none';
+  document.getElementById('ret-paso2').style.display = 'block';
+  if (typeof fbq !== 'undefined') fbq('trackCustom', 'RetornoAbierto', { content_name: 'calculadora_unificada' });
+  retFlowSync();
 }
-retEntrySync();
+function retFlowPresetSync(){
+  document.querySelectorAll('.ret-preset').forEach(function(b){
+    b.classList.toggle('active', parseInt(b.getAttribute('data-p'), 10) === retPlus);
+  });
+}
+function retFlowSetPlus(btn){
+  retPlus = parseInt(btn.getAttribute('data-p'), 10);
+  document.getElementById('ret-plus').value = retPlus;
+  retFlowPresetSync();
+  retFlowSync();
+}
+function retFlowCalc(){
+  var b = window.dcdBudget || { base: 370000, plazo: 12, e: 0, m: 0 };
+  var base = Math.max(b.base, 370000);
+  var valor = b.plazo === 0 ? base : base * Math.pow(1 + retPlus / 100, b.plazo / 12);
+  return {
+    base: base, plazo: b.plazo, valor: valor,
+    rentaMin: valor * 0.045 / 12, rentaMax: valor * 0.06 / 12,
+    totMin: (valor * 0.045 + valor * retPlus / 100) / base * 100,
+    totMax: (valor * 0.06 + valor * retPlus / 100) / base * 100
+  };
+}
+function retFlowSync(){
+  if (!document.getElementById('ret-paso2')) return;
+  var v = retFlowCalc();
+  document.getElementById('ret-plus-v').textContent = retPlus + '% anual';
+  document.getElementById('ret-f-base').textContent = 'con ' + retFmt(v.base) + (v.plazo === 0 ? ' \u00b7 entrega inmediata' : ' \u00b7 ' + v.plazo + ' meses');
+  document.getElementById('ret-f-renta').textContent = retFmt(v.rentaMin) + ' \u2013 ' + retFmt(v.rentaMax);
+  document.getElementById('ret-f-valor').textContent = retFmt(Math.round(v.valor / 10000) * 10000);
+  document.getElementById('ret-f-total').textContent = v.totMin.toFixed(1) + '% \u2013 ' + v.totMax.toFixed(1) + '%';
+  var b = window.dcdBudget || {};
+  document.getElementById('ret-full-link').setAttribute('href',
+    '/calculadora-roi.html?precio=' + (b.base || 0) + '&eng=' + (b.e || 0) + '&nmen=' + (b.m > 0 ? b.plazo : 0) + '&men=' + (b.m || 0) + '&plazo=' + Math.max(1, b.plazo || 12) + '&plus=' + retPlus);
+}
+function retFlowContacto(){
+  var v = retFlowCalc();
+  var g = {};
+  try { g = JSON.parse(localStorage.getItem('dcd_gate')) || {}; } catch (err) {}
+  var plazoTxt = v.plazo === 0 ? 'entrega inmediata' : v.plazo + ' meses';
+  var msg = 'Hola Diego, corr\u00ed mis n\u00fameros completos en tu p\u00e1gina: presupuesto de ' + retFmt(v.base) + ' (' + plazoTxt + '), plusval\u00eda esperada ' + retPlus + '% anual. Me sali\u00f3 una renta de ' + retFmt(v.rentaMin) + ' a ' + retFmt(v.rentaMax) + '/mes y un rendimiento total bruto de ' + v.totMin.toFixed(1) + '% a ' + v.totMax.toFixed(1) + '% anual. \u00bfPlaticamos qu\u00e9 me conviene?';
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Contact', { content_name: 'retorno_integrado', value: Math.round(v.valor - v.base), currency: 'MXN' });
+  }
+  var b = window.dcdBudget || {};
+  fetch(KOMMO_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      lead_name: 'Lead retorno integrado' + (g.n ? ' \u2014 ' + g.n : ''),
+      name: g.n || '',
+      phone: g.w || '',
+      note: 'RETORNO INTEGRADO depascondiego.mx\n' +
+            'Nombre: ' + (g.n || 'no proporcionado') + '\n' +
+            'WhatsApp: ' + (g.w || 'no proporcionado') + '\n' +
+            'Presupuesto: ' + retFmt(v.base) + ' | Enganche: ' + retFmt(b.e || 0) + ' | Mensualidad: ' + retFmt(b.m || 0) + '/mes | Plazo: ' + plazoTxt + '\n' +
+            'Plusvalia esperada: ' + retPlus + '% anual\n' +
+            'Renta est.: ' + retFmt(v.rentaMin) + ' - ' + retFmt(v.rentaMax) + '/mes\n' +
+            'Rendimiento total bruto: ' + v.totMin.toFixed(1) + '% - ' + v.totMax.toFixed(1) + '%'
+    })
+  }).catch(function(){});
+  window.open('https://wa.me/528132407191?text=' + encodeURIComponent(msg), '_blank');
+}
+retFlowSync();
 </script>
 
 <script>
