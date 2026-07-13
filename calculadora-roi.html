@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora ROI · depas con diego</title>
+  <meta name="description" content="Calculadora de retorno para preventa en Monterrey: separa enganche y mensualidades, proyecta plusvalía y renta, y descubre tu rendimiento real. Por Diego Domene.">
+  <link rel="canonical" href="https://depascondiego.mx/calculadora-roi.html">
+  <meta property="og:title" content="Calculadora ROI · Depas con Diego">
+  <meta property="og:description" content="Corre los números de tu inversión en preventa: plusvalía en obra, renta a la entrega y rendimiento total anual.">
+  <meta property="og:url" content="https://depascondiego.mx/calculadora-roi.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://depascondiego.mx/og-image.jpg">
+  <meta name="theme-color" content="#F2EEE6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script>var LEADS_ENDPOINT='https://leads-depascondiego.diego-43d.workers.dev';</script>
+  <script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1423786182893334');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1423786182893334&ev=PageView&noscript=1"/></noscript>
+  <style>
+    :root{--bone:#F2EEE6;--paper:#EAE4D6;--tinta:#141414;--verde:#2F4A36;--barro:#B8593E;--oro:#C9A86B;--gris:#63615A;--ff-d:'Fraunces',serif;--ff-b:'Inter Tight',sans-serif;--ff-m:'JetBrains Mono',monospace}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--ff-b);background:var(--bone);color:var(--tinta);-webkit-font-smoothing:antialiased;min-height:100vh}
+    a{text-decoration:none;color:inherit} em{font-style:italic} button,input{font:inherit} [hidden]{display:none!important}
+    .container{width:min(1160px,calc(100% - 64px));margin:0 auto}
+    .mono{font-family:var(--ff-m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+    .topbar{height:60px;display:flex;align-items:center;border-bottom:.5px solid rgba(20,20,20,.08)}
+    .back-link{transition:color .2s;font-size:10px}.back-link:hover{color:var(--tinta)}
+    .back-link:focus-visible,.btn-p:focus-visible,.form-btn:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+    .intro{padding:70px 0 44px;display:grid;grid-template-columns:minmax(0,720px) 1fr;gap:40px;align-items:end}
+    .eyebrow{margin-bottom:22px}
+    .hero-h1{font-family:var(--ff-d);font-size:clamp(38px,5vw,64px);font-weight:300;line-height:1.04;letter-spacing:-.02em;margin-bottom:22px}
+    .hero-h1 em,.intro-note em{color:var(--verde);font-weight:300}
+    .hero-sub{font-size:16px;line-height:1.6;color:var(--gris);max-width:460px}
+    .intro-note{font-family:var(--ff-d);font-size:22px;font-weight:300;line-height:1.3;padding-bottom:4px}
+    .calculator{display:grid;grid-template-columns:minmax(340px,.88fr) minmax(420px,1.12fr);min-height:720px;border:.5px solid rgba(20,20,20,.1);border-radius:2px;overflow:hidden}
+    .form-panel{background:var(--tinta);padding:44px;display:flex;flex-direction:column;justify-content:center}
+    .panel-eyebrow{color:rgba(242,238,230,.5);margin-bottom:14px}
+    .form-title{font-family:var(--ff-d);font-size:30px;font-weight:300;color:var(--bone);line-height:1.15;margin-bottom:24px}
+    .form-title em{color:var(--oro)}
+    .field{margin-bottom:9px}
+    .field label{display:block;font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,238,230,.55);margin-bottom:5px}
+    .field input{width:100%;background:rgba(242,238,230,.05);border:.5px solid rgba(242,238,230,.1);border-radius:2px;padding:10px 14px;font-size:14px;color:var(--bone);outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;color-scheme:dark}
+    .field input::placeholder{color:rgba(242,238,230,.4)}.field input:focus{border-color:rgba(201,168,107,.5)}
+    .field-error{display:block;min-height:14px;margin-top:3px;font-size:11px;line-height:1.2;color:var(--barro)}
+    .form-btn{width:100%;padding:13px;background:var(--verde);border:0;border-radius:2px;font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);cursor:pointer;margin-top:7px;transition:background .2s}.form-btn:hover{background:var(--barro)}
+    .results-panel{background:var(--paper);padding:44px 48px;display:flex;flex-direction:column;justify-content:center}
+    .results-title{font-family:var(--ff-d);font-size:30px;font-weight:300;line-height:1.15;margin:12px 0 28px}
+    .empty-state{max-width:360px}.empty-state p:last-child{font-family:var(--ff-d);font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.15;margin-top:18px;color:var(--verde)}
+    .result-section{padding:22px 0;border-top:.5px solid rgba(20,20,20,.12)}
+    .result-section:first-of-type{padding-top:0;border-top:0}
+    .section-heading{font-family:var(--ff-d);font-size:21px;font-weight:300;margin-bottom:15px}
+    .plan-grid,.phase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px}
+    .result-item{display:flex;flex-direction:column;gap:5px;min-width:0}
+    .result-label{font-family:var(--ff-m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);line-height:1.4}
+    .result-value{font-family:var(--ff-d);font-size:21px;font-weight:300;color:var(--verde);overflow-wrap:anywhere}
+    .result-note{font-size:11px;color:var(--gris);line-height:1.4}
+    .phase-eyebrow{margin-bottom:7px}
+    .star{grid-column:1/-1;text-align:center;padding-top:8px}
+    .star .result-value{font-size:clamp(26px,3.6vw,44px);line-height:1.1;color:var(--tinta)}
+    .star .result-label{margin-top:9px}.star .result-note{margin-top:4px}
+    .disclaimer{font-family:var(--ff-m);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);line-height:1.5;padding-top:18px;border-top:.5px solid rgba(20,20,20,.12)}
+    .cta-section{padding:140px 0;text-align:center;background:var(--bone);border-top:.5px solid rgba(20,20,20,.08)}
+    .cta-h2{font-family:var(--ff-d);font-size:clamp(36px,5.5vw,68px);font-weight:300;line-height:1.02;letter-spacing:-.03em;margin-bottom:18px}.cta-h2 em{color:var(--verde)}
+    .cta-sub{font-size:15px;line-height:1.65;color:var(--gris);max-width:520px;margin:0 auto 40px}.cta-btns{display:flex;justify-content:center}
+    .btn-p{font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);background:var(--verde);padding:14px 32px;border-radius:2px;transition:background .2s}.btn-p:hover{background:var(--barro)}
+    @media(max-width:900px){.intro{grid-template-columns:1fr;padding-top:52px}.intro-note{display:none}.calculator{grid-template-columns:1fr}.form-panel,.results-panel{padding:42px 36px}.results-panel{min-height:540px}}
+    @media(max-width:600px){.container{width:min(100% - 32px,1160px)}.intro{padding:42px 0 34px}.hero-h1{font-size:clamp(36px,12vw,48px)}.form-panel,.results-panel{padding:36px 24px}.calculator{border-left:0;border-right:0}.plan-grid,.phase-grid{grid-template-columns:1fr}.star{grid-column:auto}.results-panel{min-height:620px}}
+    a,button,input,select,textarea,label,summary{touch-action:manipulation}
+    .gate-roi{max-width:420px}
+    .gate-roi .gr-field{margin-bottom:10px}
+    .gate-roi .gr-field label{display:block;font-family:var(--ff-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-bottom:5px}
+    .gate-roi input[type=text],.gate-roi input[type=tel],.gate-roi input[type=email]{width:100%;background:#fff;border:.5px solid rgba(20,20,20,.18);border-radius:2px;padding:10px 14px;font-size:14px;color:var(--tinta);outline:none;transition:border-color .2s}
+    .gate-roi input:focus{border-color:var(--verde)}
+    .gate-roi input:focus-visible{outline:2px solid var(--verde);outline-offset:2px}
+    .gate-consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gris);line-height:1.5;margin:6px 0 12px;cursor:pointer}
+    .gate-btn{width:100%;padding:13px;background:var(--verde);border:0;border-radius:2px;font-family:var(--ff-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);cursor:pointer;transition:background .2s}
+    .gate-btn:hover{background:var(--barro)}
+    .gate-btn:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
+    .gate-err{display:none;font-family:var(--ff-m);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--barro);margin-bottom:8px}
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="container"><a class="mono back-link" href="/">← depascondiego.mx</a></div></div>
+  <main>
+    <header class="intro container">
+      <div><p class="mono eyebrow">Calculadora · Preventa</p><h1 class="hero-h1">Corre los <em>números</em>.</h1><p class="hero-sub">Datos, sin presión. Estima tu retorno antes de decidir.</p></div>
+      <p class="intro-note">Una decisión clara empieza con cuentas <em>claras</em>.</p>
+    </header>
+    <section class="calculator container" aria-label="Calculadora de retorno de inversión">
+      <div class="form-panel">
+        <p class="mono panel-eyebrow">Tu escenario</p><h2 class="form-title">Proyecta tu <em>inversión</em>.</h2>
+        <form id="roi-form" novalidate>
+          <div class="field"><label for="precio">Precio de lista</label><input id="precio" name="precio" type="text" inputmode="numeric" placeholder="$1,000,000" aria-describedby="error-precio"><span class="field-error" id="error-precio" aria-live="polite"></span></div>
+          <div class="field"><label for="enganche">Enganche (pago inicial)</label><input id="enganche" name="enganche" type="text" inputmode="numeric" placeholder="$200,000" aria-describedby="error-enganche"><span class="field-error" id="error-enganche" aria-live="polite"></span></div>
+          <div class="field"><label for="numMensualidades">Mensualidades en obra (cuántas)</label><input id="numMensualidades" name="numMensualidades" type="text" inputmode="numeric" placeholder="12" aria-describedby="error-numMensualidades"><span class="field-error" id="error-numMensualidades" aria-live="polite"></span></div>
+          <div class="field"><label for="montoMensual">Monto por mensualidad</label><input id="montoMensual" name="montoMensual" type="text" inputmode="numeric" placeholder="$25,000" aria-describedby="error-montoMensual error-plan"><span class="field-error" id="error-montoMensual" aria-live="polite"></span><span class="field-error" id="error-plan" aria-live="polite"></span></div>
+          <div class="field"><label for="fechaEntrega">Fecha de entrega</label><input id="fechaEntrega" name="fechaEntrega" type="month" placeholder="2027-07" aria-describedby="error-fechaEntrega"><span class="field-error" id="error-fechaEntrega" aria-live="polite"></span></div>
+          <div class="field"><label for="plusvaliaPct">Plusvalía anual (%)</label><input id="plusvaliaPct" name="plusvaliaPct" type="text" inputmode="decimal" placeholder="10%" aria-describedby="error-plusvaliaPct"><span class="field-error" id="error-plusvaliaPct" aria-live="polite"></span></div>
+          <button class="form-btn" type="submit">Calcular retorno</button>
+        </form>
+      </div>
+      <div class="results-panel" aria-live="polite">
+        <div class="empty-state" id="results-empty"><p class="mono">Resultado estimado</p><p>Completa tus datos para poner la inversión en perspectiva.</p></div>
+        <div id="teaser-roi" hidden>
+          <p class="mono">Proyección preliminar</p>
+          <h2 class="results-title">Lo que dicen tus <em>números</em>.</h2>
+          <div class="result-section" style="border-top:0;padding-top:0"><div class="phase-grid">
+            <p class="result-item star" style="padding-top:0"><span class="result-value" id="teaser-rendimiento"></span><span class="result-label">Rendimiento total anual estimado</span><span class="result-note">A partir de la entrega, si conservas y rentas el depa (renta ref. 4.5&ndash;6% del valor).</span></p>
+          </div></div>
+        </div>
+        <div id="gate-roi" class="gate-roi" hidden>
+          <p class="mono" style="margin-bottom:8px">&iquest;Quieres el desglose completo?</p>
+          <p style="font-size:13px;color:var(--gris);line-height:1.6;margin-bottom:16px">Plan de pagos &middot; ganancia por plusval&iacute;a &middot; ROI en obra &middot; renta mensual estimada &middot; valor a la entrega. Deja tus datos y te lo muestro.</p>
+          <div class="gr-field"><label for="gate-n-roi">Nombre</label><input type="text" id="gate-n-roi" placeholder="Tu nombre" autocomplete="name"></div>
+          <div class="gr-field"><label for="gate-w-roi">WhatsApp</label><input type="tel" id="gate-w-roi" placeholder="10 dígitos" autocomplete="tel" inputmode="numeric"></div>
+          <div class="gr-field"><label for="gate-e-roi">Correo (opcional)</label><input type="email" id="gate-e-roi" placeholder="tucorreo@ejemplo.com" autocomplete="email"></div>
+          <input type="text" id="gate-hp-roi" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:1px;width:1px;opacity:0">
+          <label class="gate-consent"><input type="checkbox" id="gate-c-roi" style="margin-top:2px;accent-color:var(--verde)"><span>Acepto el <a href="/aviso-de-privacidad.html" target="_blank" rel="noopener" style="text-decoration:underline">aviso de privacidad</a></span></label>
+          <p id="gate-err-roi" class="gate-err" role="alert"></p>
+          <button type="button" class="gate-btn" onclick="window.gateRoiSubmit()">Ver mi proyección completa →</button>
+        </div>
+        <div id="results" hidden>
+          <p class="mono">Proyección a la entrega</p><h2 class="results-title">Lo que dicen tus números.</h2>
+          <section class="result-section"><h3 class="section-heading">Tu plan de pagos</h3><div class="plan-grid">
+            <p class="result-item"><span class="result-label">Enganche</span><span class="result-value" id="result-enganche"></span></p>
+            <p class="result-item"><span class="result-label" id="result-mensualidades-label"></span><span class="result-value" id="result-pagos-obra"></span></p>
+            <p class="result-item"><span class="result-label">Liquidación a la entrega</span><span class="result-value" id="result-liquidacion"></span></p>
+            <p class="result-item"><span class="result-label">Calendario</span><span class="result-value" id="result-entrega"></span></p>
+          </div></section>
+          <section class="result-section"><h3 class="section-heading">Fase de obra</h3><div class="phase-grid">
+            <p class="result-item"><span class="result-label">Capital aportado en obra</span><span class="result-value" id="result-capital-obra"></span></p>
+            <p class="result-item"><span class="result-label">Ganancia por plusvalía</span><span class="result-value" id="result-ganancia"></span></p>
+            <p class="result-item"><span class="result-label">ROI real · sobre lo aportado en obra</span><span class="result-value" id="result-roi"></span></p>
+            <p class="result-item"><span class="result-label">Valor estimado a la entrega</span><span class="result-value" id="result-valor-entrega"></span></p>
+          </div></section>
+          <section class="result-section"><p class="mono phase-eyebrow">A partir de la entrega</p><h3 class="section-heading">Si conservas y rentas</h3><div class="phase-grid">
+            <p class="result-item"><span class="result-label">Renta mensual estimada &middot; 4.5&ndash;6% anual del valor</span><span class="result-value" id="result-renta-mensual"></span></p>
+            <p class="result-item"><span class="result-label">Renta anual estimada</span><span class="result-value" id="result-renta-anual"></span></p>
+            <p class="result-item star"><span class="result-value" id="result-rendimiento-total"></span><span class="result-label">Rendimiento total anual estimado</span><span class="result-note">A partir de la entrega, si conservas el depa.</span></p>
+          </div></section>
+          <p class="disclaimer">Renta estimada: 4.5&ndash;6% anual del valor a la entrega, referencia de mercado en Monterrey. Estimaciones ilustrativas. No constituye asesor&iacute;a financiera.</p>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section" aria-label="Contacto"><div class="container">
+      <h2 class="cta-h2">Estos números son un punto de <em>partida</em>.</h2>
+      <p class="cta-sub">Cada inversionista tiene metas distintas — platiquemos y encontramos la estrategia ideal para ti.</p>
+      <div class="cta-btns"><a class="btn-p" id="cta-whatsapp" href="https://wa.me/528132407191" target="_blank" rel="noopener">Platicar por WhatsApp</a></div>
+      <p class="mono" style="margin-top:22px"><a href="/#calculadora">¿Aún no sabes tu presupuesto? → Calculadora de presupuesto</a></p>
+    </div></section>
+  </main>
+  <script type="module" id="roi-module">
+    export function monthsUntil(yyyyMm, now) {
+      const [year, month] = yyyyMm.split("-").map(Number);
+      return (year - now.getFullYear()) * 12 + (month - (now.getMonth() + 1));
+    }
+
+    export function validateRoiInputs(rawFields, now = new Date()) {
+      const fields = rawFields ?? {};
+      const errors = {};
+      const values = {};
+
+      function normalize(key) {
+        const rawValue = fields[key];
+        if (typeof rawValue === "string") {
+          const stripped = rawValue.replace(/[\s$%,]/g, "");
+          if (!/^-?(\d+\.?\d*|\.\d+)$/.test(stripped)) return null;
+          const number = Number(stripped);
+          return Number.isFinite(number) ? number + 0 : null;
+        }
+        return typeof rawValue === "number" && Number.isFinite(rawValue) ? rawValue + 0 : null;
+      }
+
+      const precio = normalize("precio");
+      if (precio === null) errors.precio = "Ingresa el precio de lista.";
+      else if (precio <= 0 || precio > 1_000_000_000) errors.precio = "El precio debe ser mayor a 0 y hasta $1,000,000,000.";
+      else values.precio = precio;
+
+      const enganche = normalize("enganche");
+      if (enganche === null) errors.enganche = "Ingresa el enganche.";
+      else if (enganche <= 0 || enganche > 1_000_000_000) errors.enganche = "El enganche debe ser mayor a 0 y hasta $1,000,000,000.";
+      else values.enganche = enganche;
+
+      const numMensualidades = normalize("numMensualidades");
+      if (numMensualidades === null) errors.numMensualidades = "Indica cuántas mensualidades son.";
+      else if (!Number.isInteger(numMensualidades) || numMensualidades < 0 || numMensualidades > 120) errors.numMensualidades = "Las mensualidades deben ser un entero de 0 a 120.";
+      else values.numMensualidades = numMensualidades;
+
+      const montoMensual = normalize("montoMensual");
+      if (montoMensual === null) errors.montoMensual = "Indica el monto de cada mensualidad.";
+      else if (montoMensual < 0 || montoMensual > 10_000_000) errors.montoMensual = "El monto mensual debe estar entre $0 y $10,000,000.";
+      else values.montoMensual = montoMensual;
+
+      const fechaEntrega = fields.fechaEntrega;
+      if (typeof fechaEntrega !== "string" || fechaEntrega.length === 0) errors.fechaEntrega = "Indica la fecha de entrega.";
+      else if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(fechaEntrega)) errors.fechaEntrega = "Usa el formato AAAA-MM.";
+      else {
+        const mesesEntrega = monthsUntil(fechaEntrega, now);
+        if (mesesEntrega < 1 || mesesEntrega > 120) errors.fechaEntrega = "La entrega debe ser entre el próximo mes y 10 años.";
+        else values.mesesEntrega = mesesEntrega;
+      }
+
+      const plusvaliaPct = normalize("plusvaliaPct");
+      if (plusvaliaPct === null) errors.plusvaliaPct = "Ingresa la plusvalía anual.";
+      else if (plusvaliaPct < 0 || plusvaliaPct > 50) errors.plusvaliaPct = "La plusvalía anual debe estar entre 0 y 50%.";
+      else values.plusvaliaPct = plusvaliaPct;
+
+      const precioPassed = !("precio" in errors);
+      const enganchePassed = !("enganche" in errors);
+      const numMensualidadesPassed = !("numMensualidades" in errors);
+      const montoMensualPassed = !("montoMensual" in errors);
+
+      if (precioPassed && enganchePassed && enganche > precio) {
+        errors.enganche = "El enganche no puede exceder el precio.";
+      }
+      if (numMensualidadesPassed && montoMensualPassed && numMensualidades > 0 && montoMensual <= 0) {
+        errors.montoMensual = "Indica el monto de cada mensualidad.";
+      }
+      if (precioPassed && enganchePassed && numMensualidadesPassed && montoMensualPassed && precio - enganche - numMensualidades * montoMensual < 0) {
+        errors.plan = "Los pagos superan el precio: ajusta enganche o mensualidades.";
+      }
+
+      return { valid: Object.keys(errors).length === 0, errors, values };
+    }
+
+    export function computeRoi(values) {
+      const pagosObra = values.numMensualidades * values.montoMensual;
+      const liquidacion = values.precio - values.enganche - pagosObra;
+      const capitalObra = values.enganche + pagosObra;
+      const valorEntrega = values.precio * (1 + values.plusvaliaPct / 100) ** (values.mesesEntrega / 12);
+      const gananciaPlusvalia = valorEntrega - values.precio;
+      const roiRealPct = gananciaPlusvalia / capitalObra * 100;
+      const RENTA_YIELD_MIN = 0.045, RENTA_YIELD_MAX = 0.06; // referencia de mercado Monterrey (zonas premium 4.4-4.5%, promedio ciudad 6.47%)
+      const rentaAnualMin = valorEntrega * RENTA_YIELD_MIN;
+      const rentaAnualMax = valorEntrega * RENTA_YIELD_MAX;
+      const rentaMensualMin = rentaAnualMin / 12;
+      const rentaMensualMax = rentaAnualMax / 12;
+      const plusvaliaAnualMonto = valorEntrega * values.plusvaliaPct / 100;
+      const rendimientoTotalMinPct = (rentaAnualMin + plusvaliaAnualMonto) / values.precio * 100;
+      const rendimientoTotalMaxPct = (rentaAnualMax + plusvaliaAnualMonto) / values.precio * 100;
+      return { pagosObra, liquidacion, capitalObra, valorEntrega, gananciaPlusvalia, roiRealPct, rentaAnualMin, rentaAnualMax, rentaMensualMin, rentaMensualMax, rendimientoTotalMinPct, rendimientoTotalMaxPct };
+    }
+
+    export function formatMXN(n) {
+      return new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 }).format(n);
+    }
+
+    export function formatPct(n) {
+      return n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " %";
+    }
+
+    export function buildWhatsAppLink(values, fechaEntrega, projection) {
+      const [year, month] = fechaEntrega.split("-").map(Number);
+      const mesEntrega = new Date(year, month - 1, 1).toLocaleDateString("es-MX", { month: "long", year: "numeric" });
+      let message = `Hola Diego, corrí un escenario en tu calculadora: precio de lista de ${formatMXN(values.precio)}, mensualidades de ${formatMXN(values.montoMensual)} y entrega en ${mesEntrega}.`;
+      if (projection) {
+        message += ` Me salió un ROI en obra de ${formatPct(projection.roiRealPct)} y un rendimiento total estimado de ${formatPct(projection.rendimientoTotalMinPct)} a ${formatPct(projection.rendimientoTotalMaxPct)} anual si lo rento.`;
+      }
+      message += ` Me gustaría platicar qué estrategia me conviene.`;
+      return "https://wa.me/528132407191?text=" + encodeURIComponent(message);
+    }
+
+    if (typeof document !== "undefined") {
+      const form = document.getElementById("roi-form");
+      const results = document.getElementById("results");
+      const emptyState = document.getElementById("results-empty");
+
+      function formatMoneyInput(input) {
+        const caret = input.selectionStart ?? input.value.length;
+        const digitsBeforeCaret = (input.value.slice(0, caret).match(/\d/g) ?? []).length;
+        const digits = input.value.replace(/\D/g, "");
+        if (!digits) { input.value = ""; return; }
+        input.value = "$" + digits.replace(/^0+(?=\d)/, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        let nextCaret = digitsBeforeCaret === 0 ? 1 : input.value.length;
+        let seen = 0;
+        for (let index = 0; index < input.value.length; index += 1) {
+          if (/\d/.test(input.value[index])) seen += 1;
+          if (seen === digitsBeforeCaret) { nextCaret = index + 1; break; }
+        }
+        input.setSelectionRange(nextCaret, nextCaret);
+      }
+
+      for (const key of ["precio", "enganche", "montoMensual", "rentaMensual"]) {
+        document.getElementById(key)?.addEventListener("input", (event) => formatMoneyInput(event.currentTarget));
+      }
+
+      const gatePanel = document.getElementById("gate-roi");
+      const teaserPanel = document.getElementById("teaser-roi");
+      let pendingRender = null;
+
+      function renderTeaser(projection) {
+        const set = (id, value) => { document.getElementById(id).textContent = value; };
+        set("teaser-rendimiento", formatPct(projection.rendimientoTotalMinPct) + " \u2013 " + formatPct(projection.rendimientoTotalMaxPct));
+        emptyState.hidden = true; results.hidden = true;
+        teaserPanel.hidden = false; gatePanel.hidden = false;
+      }
+
+      function gateData() {
+        try { return JSON.parse(localStorage.getItem("dcd_gate")) || null; } catch (e) { return null; }
+      }
+
+      function buildLeadNote(values, projection, rawFields) {
+        const g = gateData() || {};
+        return "CALC ROI depascondiego.mx\n" +
+          "Nombre: " + (g.n || "no proporcionado") + "\n" +
+          "WhatsApp: " + (g.w || "no proporcionado") + "\n" +
+          "Precio: " + formatMXN(values.precio) + "\n" +
+          "Enganche: " + formatMXN(values.enganche) + "\n" +
+          "Mensualidades: " + values.numMensualidades + " de " + formatMXN(values.montoMensual) + "\n" +
+          "Entrega: " + rawFields.fechaEntrega + " (" + values.mesesEntrega + " meses)\n" +
+          "Plusvalia est.: " + values.plusvaliaPct + "% anual\n" +
+          "Renta est. (4.5-6% del valor): " + formatMXN(projection.rentaMensualMin) + " - " + formatMXN(projection.rentaMensualMax) + "/mes\n" +
+          "ROI en obra: " + formatPct(projection.roiRealPct) + "\n" +
+          "Rendimiento total anual: " + formatPct(projection.rendimientoTotalMinPct) + " - " + formatPct(projection.rendimientoTotalMaxPct);
+      }
+
+      function sendLead(values, projection, rawFields) {
+        if (typeof LEADS_ENDPOINT === "undefined") return;
+        const g = gateData() || {};
+        fetch(LEADS_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lead_name: "Lead ROI — " + (g.n || "escenario anonimo"),
+            name: g.n || "",
+            phone: g.w || "",
+            note: buildLeadNote(values, projection, rawFields),
+          }),
+        }).catch(() => {});
+      }
+
+      function renderResults(validation, projection, rawFields) {
+        const set = (id, value) => { document.getElementById(id).textContent = value; };
+        set("result-enganche", formatMXN(validation.values.enganche));
+        set("result-mensualidades-label", `${validation.values.numMensualidades} mensualidades de ${formatMXN(validation.values.montoMensual)} =`);
+        set("result-pagos-obra", formatMXN(projection.pagosObra));
+        set("result-liquidacion", formatMXN(projection.liquidacion));
+        set("result-entrega", `Entrega en ${validation.values.mesesEntrega} meses`);
+        set("result-capital-obra", formatMXN(projection.capitalObra));
+        set("result-ganancia", formatMXN(projection.gananciaPlusvalia));
+        set("result-roi", formatPct(projection.roiRealPct));
+        set("result-valor-entrega", formatMXN(projection.valorEntrega));
+        set("result-renta-mensual", formatMXN(projection.rentaMensualMin) + " \u2013 " + formatMXN(projection.rentaMensualMax));
+        set("result-renta-anual", formatMXN(projection.rentaAnualMin) + " \u2013 " + formatMXN(projection.rentaAnualMax));
+        set("result-rendimiento-total", formatPct(projection.rendimientoTotalMinPct) + " \u2013 " + formatPct(projection.rendimientoTotalMaxPct));
+        document.getElementById("cta-whatsapp").href = buildWhatsAppLink(validation.values, rawFields.fechaEntrega, projection);
+        emptyState.hidden = true; gatePanel.hidden = true; teaserPanel.hidden = true; results.hidden = false;
+        sendLead(validation.values, projection, rawFields);
+      }
+
+      window.gateRoiSubmit = function () {
+        const n = document.getElementById("gate-n-roi").value.trim();
+        let w = document.getElementById("gate-w-roi").value.replace(/\D/g, "");
+        const em = document.getElementById("gate-e-roi").value.trim();
+        const c = document.getElementById("gate-c-roi").checked;
+        const hp = document.getElementById("gate-hp-roi").value;
+        const err = document.getElementById("gate-err-roi");
+        const showErr = (m) => { err.textContent = m; err.style.display = "block"; };
+        if (hp) { if (pendingRender) renderResults(pendingRender.validation, pendingRender.projection, pendingRender.rawFields); return; }
+        if (w.length === 12 && w.indexOf("52") === 0) w = w.slice(2);
+        if (w.length === 13 && w.indexOf("521") === 0) w = w.slice(3);
+        if (!n) return showErr("Falta tu nombre");
+        if (w.length !== 10) return showErr("WhatsApp: deben ser 10 d\u00edgitos");
+        if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return showErr("Revisa el correo");
+        if (!c) return showErr("Acepta el aviso de privacidad");
+        err.style.display = "none";
+        try { localStorage.setItem("dcd_gate", JSON.stringify({ n: n, w: w, ts: Date.now() })); } catch (e) {}
+        if (typeof fbq !== "undefined") fbq("track", "Lead", { content_name: "gate_roi", content_category: "herramientas" });
+        if (pendingRender) {
+          renderResults(pendingRender.validation, pendingRender.projection, pendingRender.rawFields);
+          pendingRender = null;
+        }
+      };
+
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        for (const errorSpan of document.querySelectorAll(".field-error")) errorSpan.textContent = "";
+        const rawFields = Object.fromEntries(new FormData(form));
+        const validation = validateRoiInputs(rawFields);
+        for (const input of form.querySelectorAll("input[name]")) {
+          if (input.name in validation.errors) input.setAttribute("aria-invalid", "true");
+          else input.removeAttribute("aria-invalid");
+        }
+        if (!validation.valid) {
+          for (const [key, message] of Object.entries(validation.errors)) {
+            const errorSpan = document.getElementById(`error-${key}`);
+            if (errorSpan) errorSpan.textContent = message;
+          }
+          results.hidden = true; gatePanel.hidden = true; teaserPanel.hidden = true; emptyState.hidden = false; return;
+        }
+        const projection = computeRoi(validation.values);
+        if (typeof fbq !== "undefined") fbq("trackCustom", "ROICalculado", { content_name: "calculadora_roi" });
+        if (!gateData()) {
+          pendingRender = { validation, projection, rawFields };
+          renderTeaser(projection);
+          sendLead(validation.values, projection, rawFields);
+          return;
+        }
+        renderResults(validation, projection, rawFields);
+      });
+    }
+  </script>
+</body>
+</html>
