@@ -303,13 +303,16 @@ footer{border-top:0.5px solid var(--line)}
     q.opts.forEach(function(o){
       var b=document.createElement('button'); b.type='button'; b.className='opt';
       b.setAttribute('aria-pressed', A[q.k]===o[0]?'true':'false');
+      b.setAttribute('aria-label', o[1].replace(/<[^>]*>/g,''));
       b.innerHTML='<span>'+o[1]+'</span><span class="arr" aria-hidden="true">&rarr;</span>';
       b.addEventListener('click', function(){ pick(q.k,o[0]) });
       box.appendChild(b);
     });
     prog(i); show('s-q'); $('q-title').focus({preventScroll:true});
   }
+  var lock=false;
   function pick(k,v){
+    if(lock) return; lock=true; setTimeout(function(){lock=false},350);
     A[k]=v; i++;
     if(i<Q.length){ renderQ() } else { prog(5); show('s-data'); $('t-data').focus({preventScroll:true}) }
   }
