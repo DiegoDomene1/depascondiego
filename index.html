@@ -480,6 +480,10 @@ em{font-style:italic}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:var(--verde);color:var(--bone);font-family:var(--ff-m);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:12px 18px;border-radius:2px;text-decoration:none}.skip-link:focus-visible{left:12px;top:12px}
 a,button,input,select,textarea,label,summary{touch-action:manipulation}
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VWTX56KL1P"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VWTX56KL1P');
+function gaEv(n,p){try{gtag('event',n,p||{})}catch(e){}}</script>
 </head>
 <body>
 <a href="#main" class="skip-link">Saltar al contenido</a>
@@ -1331,6 +1335,7 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
     if (h > 0) msg += '*Crédito hipotecario:* ' + fmt(h) + '%0A';
     if (matches.length > 0) msg += '*Proyectos que encajan:* ' + matches.join(', ') + '%0A';
 
+    gaEv('calculadora_resultado', { proyectos: matches.join(','), valor: Math.round((low + high) / 2) });
     // Meta Pixel
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Contact', {
@@ -1365,6 +1370,7 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
   function trackNav() {
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Contact', { content_name: 'nav_cta', content_category: 'WhatsApp' });
+      gaEv('contacto_click', { metodo: 'whatsapp', ubicacion: 'nav' });
     }
     fetch(LEADS_ENDPOINT, {
       method: 'POST',
@@ -1410,6 +1416,7 @@ a,button,input,select,textarea,label,summary{touch-action:manipulation}
     var objetivoTxt = objSel.selectedIndex > 0 ? objSel.options[objSel.selectedIndex].text : 'a\u00fan explorando';
     var budgetTxt   = budSel.selectedIndex > 0 ? budSel.options[budSel.selectedIndex].text : 'por definir';
 
+    gaEv('generate_lead', { formulario: 'hero', objetivo: objetivo, presupuesto: budget });
     if(typeof fbq!=='undefined'){
       fbq('track','Lead',{
         content_name: objetivo,
@@ -1458,6 +1465,7 @@ function retFlowOpen(){
   document.getElementById('ret-hook').style.display = 'none';
   document.getElementById('ret-paso2').style.display = 'block';
   if (typeof fbq !== 'undefined') fbq('trackCustom', 'RetornoAbierto', { content_name: 'calculadora_unificada' });
+  gaEv('retorno_abierto');
   retFlowSync();
 }
 function retFlowPresetSync(){
@@ -1502,6 +1510,7 @@ function retFlowContacto(){
   var msg = 'Hola Diego, corr\u00ed mis n\u00fameros completos en tu p\u00e1gina: presupuesto de ' + retFmt(v.base) + ' (' + plazoTxt + '), plusval\u00eda esperada ' + retPlus + '% anual. Me sali\u00f3 una renta de ' + retFmt(v.rentaMin) + ' a ' + retFmt(v.rentaMax) + '/mes y un rendimiento total bruto de ' + v.totMin.toFixed(1) + '% a ' + v.totMax.toFixed(1) + '% anual. \u00bfPlaticamos qu\u00e9 me conviene?';
   if (typeof fbq !== 'undefined') {
     fbq('track', 'Contact', { content_name: 'retorno_integrado', value: Math.round(v.valor - v.base), currency: 'MXN' });
+    gaEv('contacto_click', { metodo: 'whatsapp', ubicacion: 'retorno' });
   }
   var b = window.dcdBudget || {};
   fetch(LEADS_ENDPOINT, {
@@ -1562,6 +1571,7 @@ function gateSubmit(s){
   } catch (err) {}
   if (typeof fbq !== 'undefined') {
     fbq('track', 'Lead', { content_name: 'gate_' + tool.toLowerCase(), content_category: 'herramientas' });
+    gaEv('generate_lead', { formulario: 'gate_' + tool.toLowerCase() });
   }
   fetch(LEADS_ENDPOINT, {
     method: 'POST',

@@ -96,6 +96,10 @@ fbq('track', 'PageView');
     .gate-btn:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
     .gate-err{display:none;font-family:var(--ff-m);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--barro);margin-bottom:8px}
   </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VWTX56KL1P"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VWTX56KL1P');
+function gaEv(n,p){try{gtag('event',n,p||{})}catch(e){}}</script>
 </head>
 <body>
   <div class="topbar"><div class="container"><a class="mono back-link" href="/">← depascondiego.mx</a></div></div>
@@ -359,6 +363,7 @@ fbq('track', 'PageView');
       }
 
       function sendLead(v, projection) {
+        if (typeof gaEv === "function") gaEv("generate_lead", { formulario: "roi" });
         if (typeof LEADS_ENDPOINT === "undefined") return;
         var g = gateData() || {};
         fetch(LEADS_ENDPOINT, {

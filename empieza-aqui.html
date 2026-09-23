@@ -141,6 +141,10 @@ footer{border-top:0.5px solid var(--line)}
 @media(hover:none) and (pointer:coarse){.opt,.btn{min-height:56px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VWTX56KL1P"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VWTX56KL1P');
+function gaEv(n,p){try{gtag('event',n,p||{})}catch(e){}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -309,12 +313,13 @@ footer{border-top:0.5px solid var(--line)}
       box.appendChild(b);
     });
     prog(i); show('s-q'); $('q-title').focus({preventScroll:true});
+    gaEv('filtro_pregunta', { paso: i+1, pregunta: q.k });
   }
   var lock=false;
   function pick(k,v){
     if(lock) return; lock=true; setTimeout(function(){lock=false},350);
     A[k]=v; i++;
-    if(i<Q.length){ renderQ() } else { prog(5); show('s-data'); $('t-data').focus({preventScroll:true}) }
+    if(i<Q.length){ renderQ() } else { prog(5); show('s-data'); $('t-data').focus({preventScroll:true}); gaEv('filtro_datos') }
   }
 
   /* ===== ruteo ===== */
@@ -385,9 +390,10 @@ footer{border-top:0.5px solid var(--line)}
 
     $('r-sum').innerHTML = Q.map(function(q){return '<span class="chip">'+txt(q.k)+'</span>'}).join('');
     $('r-ctas').querySelectorAll('[data-cta]').forEach(function(a){
-      a.addEventListener('click',function(){ if(typeof fbq!=='undefined') fbq('track','Contact',{content_name:'filtro_web_'+a.getAttribute('data-cta'),content_category:k}) });
+      a.addEventListener('click',function(){ if(typeof fbq!=='undefined') fbq('track','Contact',{content_name:'filtro_web_'+a.getAttribute('data-cta'),content_category:k}); gaEv('contacto_click',{metodo:a.getAttribute('data-cta'),ubicacion:'filtro',resultado:k}) });
     });
     show('s-res'); $('t-res').focus({preventScroll:true});
+    gaEv('filtro_resultado', { resultado: k, con_datos: datos ? 'si' : 'no' });
   }
 
   /* ===== envío del lead ===== */
@@ -409,10 +415,11 @@ footer{border-top:0.5px solid var(--line)}
       })}).catch(function(){});
     }catch(e){}
     if(typeof fbq!=='undefined') fbq('track','Lead',{content_name:'filtro_web',content_category:res});
+    gaEv('generate_lead', { formulario: 'filtro', resultado: res });
   }
 
   /* ===== eventos ===== */
-  $('start').addEventListener('click', function(){ i=0; renderQ(); if(typeof fbq!=='undefined') fbq('trackCustom','FiltroInicio',{origen:ORIGEN}) });
+  $('start').addEventListener('click', function(){ i=0; renderQ(); if(typeof fbq!=='undefined') fbq('trackCustom','FiltroInicio',{origen:ORIGEN}); gaEv('filtro_inicio',{origen:ORIGEN}) });
   $('q-back').addEventListener('click', function(){ if(i===0){ show('s-intro') } else { i--; renderQ() } });
   $('d-back').addEventListener('click', function(){ i=Q.length-1; renderQ() });
   $('r-restart').addEventListener('click', function(){ A={}; i=0; datos=null; $('f').reset(); show('s-intro'); });
