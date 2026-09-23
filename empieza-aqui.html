@@ -296,7 +296,7 @@ function gaEv(n,p){try{gtag('event',n,p||{})}catch(e){}}</script>
     document.querySelector('.prog-bar').setAttribute('aria-valuenow', Math.min(n,5));
   }
   function txt(k){var q=Q.filter(function(x){return x.k===k})[0];var o=q.opts.filter(function(x){return x[0]===A[k]})[0];return o?o[1]:''}
-  function mm(n){var v=n/1e6;return '$'+(Math.round(v*100)/100).toFixed(2).replace(/\.?0+$/,'')+'M'}
+  function mm(n){return '$'+(Math.round(n/1e5)/10).toFixed(1).replace(/\.0$/,'')+'M'} /* redondeo estándar a $100,000 */
 
   function renderQ(){
     var q = Q[i];
@@ -361,7 +361,7 @@ function gaEv(n,p){try{gtag('event',n,p||{})}catch(e){}}</script>
     if(k==='fuera'){
       $('r-label').textContent='Tu resultado';
       $('t-res').innerHTML='Hoy no tengo una opción <em>en ese rango</em><span class="dot">.</span>';
-      $('r-lede').textContent='Los proyectos que manejo en Nest arrancan en $7.42M. Prefiero decírtelo claro que mandarte algo que no te sirve.';
+      $('r-lede').textContent='Los proyectos que manejo en Nest arrancan en $7.4M. Prefiero decírtelo claro que mandarte algo que no te sirve.';
       $('r-box').hidden=false;
       $('r-box').innerHTML='<p>Si tu presupuesto cambia, o quieres ver cómo se arma el pago en partes, estas dos cosas te sirven:</p><div class="links"><a class="btn ghost" href="/#calculadora">Calcular mi presupuesto real</a><a class="btn ghost" target="_blank" rel="noopener" href="'+waMsg([])+'">'+WA_SVG+'Avísame si sale algo en mi rango</a></div>';
     } else {
@@ -374,7 +374,7 @@ function gaEv(n,p){try{gtag('event',n,p||{})}catch(e){}}</script>
         ms.forEach(function(m){
           var d=document.createElement('article'); d.className='match'; d.style.setProperty('--acc',m.p.acc);
           d.innerHTML='<div class="match-top"><h3 class="match-name">'+m.name+'</h3><span class="match-zone">'+m.p.zona+' · entrega '+m.p.entrega+'</span></div><ul>'+
-            m.tipos.map(function(t){return '<li>'+t.t+' <span>· '+(t.d===t.h?mm(t.d):mm(t.d)+' a '+mm(t.h))+'</span></li>'}).join('')+'</ul>';
+            m.tipos.map(function(t){return '<li>'+t.t+' <span>· '+(mm(t.d)===mm(t.h)?mm(t.d):mm(t.d)+' a '+mm(t.h))+'</span></li>'}).join('')+'</ul>';
           $('r-matches').appendChild(d);
         });
         $('r-fine').hidden=false;
